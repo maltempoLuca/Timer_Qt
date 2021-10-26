@@ -5,7 +5,7 @@
 #include "claase_per_provare_googleTest.h"
 
 claase_per_provare_googleTest::claase_per_provare_googleTest(int num) {
-    this->numero = numero;
+    this->numero = num;
 }
 
 int claase_per_provare_googleTest::getNumero() {
