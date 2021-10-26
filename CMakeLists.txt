@@ -14,7 +14,7 @@ find_package(Qt6 COMPONENTS
         Widgets
         REQUIRED)
 
-set(SOURCE_FILES cpp_file_per_provare_Cmake.cpp)
+set(SOURCE_FILES claase_per_provare_googleTest.cpp claase_per_provare_googleTest.h)
 add_executable(Timer_Qt main.cpp)
 add_library(core ${SOURCE_FILES})
 
