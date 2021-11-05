@@ -7,7 +7,7 @@
 Clock::Clock() : date(), time() {
     qTimer = new QTimer(this);
     connect(qTimer, SIGNAL(timeout()), this, SLOT(increase()));
-    qTimer->start(10);
+    qTimer->start(1000);
 }
 
 Clock::~Clock() {
