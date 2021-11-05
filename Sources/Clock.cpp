@@ -11,7 +11,7 @@ Clock::Clock() : date(), time() {
 }
 
 Clock::~Clock() {
-    delete qTimer;
+    // qTimer's parent is clock, a QObject, you don't have to manually delete qTimer. Read QT Memory Management.
 }
 
 
@@ -25,8 +25,8 @@ void Clock::getTIME() {
 }
 
 void Clock::increase() {
-    QTime time = QTime::currentTime();
-    QString timeText = time.toString("hh : mm : ss : zzz");
+    QTime tprTime = QTime::currentTime();
+    QString timeText = tprTime.toString("hh : mm : ss : zzz");
     std::cout << timeText.toStdString() << "\n";
 }
 
