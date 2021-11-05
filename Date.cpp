@@ -4,8 +4,14 @@
 
 #include "Date.h"
 
-Date::Date(int day, int dayOfWeek, int month, int year, bool isLeapYear) : day(day), dayOfWeek(dayOfWeek), month(month),
-                                                                           year(year), isLeapYear(isLeapYear) {}
+Date::Date(int day, int dayOfWeek, int month, int year, bool isLeapYear, DateFormat dateFormat) : day(day),
+                                                                                                  dayOfWeek(dayOfWeek),
+                                                                                                  month(month),
+                                                                                                  year(year),
+                                                                                                  isLeapYear(
+                                                                                                          isLeapYear),
+                                                                                                  dateFormat(
+                                                                                                          dateFormat) {}
 
 int Date::getDay() const {
     return day;

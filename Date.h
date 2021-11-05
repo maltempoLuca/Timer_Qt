@@ -7,9 +7,13 @@
 
 #include <string>
 
+enum DateFormat {
+    YMD, DMY, MDY, ReducedFormat
+};
+
 class Date {
 public:
-    Date(int day, int dayOfWeek, int month, int year, bool isLeapYear);
+    Date(int day, int dayOfWeek, int month, int year, bool isLeapYear, DateFormat dateFormat = DMY);
 
     ~Date();
 
@@ -37,6 +41,7 @@ public:
 private:
     int day, dayOfWeek, month, year;
     bool isLeapYear;
+    DateFormat dateFormat;
     std::string daysOfWeek[7] = {"Monday", "Tuesday", "Wednesday",
                                  "Thursday", "Friday", "Saturday",
                                  "Sunday"};
