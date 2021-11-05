@@ -11,6 +11,8 @@ enum TimeFormat {
 
 class Time {
 public:
+    Time();
+
     Time(int milliSeconds, int seconds, int minutes, int hours, TimeFormat = Format24h);
 
 public:

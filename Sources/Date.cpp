@@ -2,7 +2,18 @@
 // Created by Luca Maltempo on 05/11/21.
 //
 
+#include <QDate>
 #include "../Headers/Date.h"
+
+Date::Date() {
+    QDate qDate = QDate::currentDate();
+    day = qDate.day();
+    dayOfWeek = qDate.dayOfWeek();
+    month = qDate.month();
+    year = qDate.year();
+    isLeapYear = qDate.isLeapYear(year);
+    dateFormat = DMY;
+}
 
 Date::Date(int day, int dayOfWeek, int month, int year, bool isLeapYear, DateFormat dateFormat) : day(day),
                                                                                                   dayOfWeek(dayOfWeek),

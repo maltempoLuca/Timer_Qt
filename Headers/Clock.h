@@ -7,24 +7,31 @@
 
 #include "Date.h"
 #include "Time.h"
+#include <QObject>
 #include <QTimer>
 #include <QDate>
+#include <iostream>
 
-class Clock {
+
+class Clock : public QObject {
+Q_OBJECT
 public:
     Clock();
 
     void getDATE();
 
+    virtual ~Clock();
+
     void getTIME();
 
-private:
-    QTimer qTimer;
-    QTime qTime = QTime::currentTime();
-    QDate qDate = QDate::currentDate();
-    Date date = Date(qDate.day(), qDate.dayOfWeek(), qDate.month(), qDate.year(), qDate.isLeapYear(qDate.year()), DMY);
-    Time time = Time(qTime.msec(), qTime.second(), qTime.minute(), qTime.hour(), Format12h);
+public slots:
 
+    void increase();
+
+private:
+    Date date;
+    Time time;
+    QTimer *qTimer;
 };
 
 

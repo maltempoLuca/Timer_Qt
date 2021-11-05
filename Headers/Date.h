@@ -13,6 +13,8 @@ enum DateFormat {
 
 class Date {
 public:
+    Date();
+
     Date(int day, int dayOfWeek, int month, int year, bool isLeapYear, DateFormat dateFormat = DMY);
 
     ~Date();
