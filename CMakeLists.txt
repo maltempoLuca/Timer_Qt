@@ -14,7 +14,7 @@ find_package(Qt6 COMPONENTS
         Widgets
         REQUIRED)
 
-set(SOURCE_FILES claase_per_provare_googleTest.cpp claase_per_provare_googleTest.h Date.cpp Date.h)
+set(SOURCE_FILES claase_per_provare_googleTest.cpp claase_per_provare_googleTest.h Date.cpp Date.h Time.cpp Time.h)
 add_executable(Timer_Qt main.cpp)
 add_library(core ${SOURCE_FILES})
 
