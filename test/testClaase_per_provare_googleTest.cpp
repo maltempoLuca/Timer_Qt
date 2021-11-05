@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
 
-#include "../claase_per_provare_googleTest.h"
+#include "../Headers/claase_per_provare_googleTest.h"
 
 TEST(claase_per_provare_googleTest, costruttore) {
     claase_per_provare_googleTest cappero(5);

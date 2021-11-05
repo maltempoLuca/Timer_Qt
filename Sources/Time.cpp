@@ -2,7 +2,7 @@
 // Created by Luca Maltempo on 05/11/21.
 //
 
-#include "Time.h"
+#include "../Headers/Time.h"
 
 Time::Time(int milliSeconds, int seconds, int minutes, int hours, TimeFormat timeFormat) : milliSeconds(milliSeconds),
                                                                                            seconds(seconds),

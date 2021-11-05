@@ -14,14 +14,14 @@ find_package(Qt6 COMPONENTS
         Widgets
         REQUIRED)
 
-set(SOURCE_FILES claase_per_provare_googleTest.cpp claase_per_provare_googleTest.h Date.cpp Date.h Time.cpp Time.h)
-add_executable(Timer_Qt main.cpp)
+set(SOURCE_FILES Sources/claase_per_provare_googleTest.cpp Headers/claase_per_provare_googleTest.h Sources/Date.cpp Headers/Date.h Sources/Time.cpp Headers/Time.h)
+add_executable(Timer_Qt Sources/main.cpp)
 add_library(core ${SOURCE_FILES})
 
 target_link_libraries(Timer_Qt
+        core
         Qt::Core
         Qt::Gui
         Qt::Widgets
-        core
         )
 
