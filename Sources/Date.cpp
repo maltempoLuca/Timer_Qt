@@ -5,7 +5,8 @@
 #include <QDate>
 #include "../Headers/Date.h"
 
-Date::Date() {
+Date::Date() : daysOfWeek({"Monday", "Tuesday", "Wednesday",
+                           "Thursday", "Friday", "Saturday", "Sunday"}) {
     QDate qDate = QDate::currentDate();
     day = qDate.day();
     dayOfWeek = qDate.dayOfWeek() - 1;
@@ -15,14 +16,15 @@ Date::Date() {
     dateFormat = DMY;
 }
 
-Date::Date(int day, int dayOfWeek, int month, int year, bool isLeapYear, DateFormat dateFormat) : day(day),
-                                                                                                  dayOfWeek(dayOfWeek),
-                                                                                                  month(month),
-                                                                                                  year(year),
-                                                                                                  isLeapYear(
-                                                                                                          isLeapYear),
-                                                                                                  dateFormat(
-                                                                                                          dateFormat) {}
+Date::Date(int day, int dayOfWeek, int month, int year, bool isLeapYear, DateFormat dateFormat) :
+        daysOfWeek({"Monday", "Tuesday", "Wednesday",
+                    "Thursday", "Friday", "Saturday", "Sunday"}),
+        day(day),
+        dayOfWeek(dayOfWeek),
+        month(month),
+        year(year),
+        isLeapYear(isLeapYear),
+        dateFormat(dateFormat) {}
 
 int Date::getDay() const {
     return day;
@@ -79,7 +81,7 @@ bool Date::getIsLeapYear() const {
     return isLeapYear;
 }
 
-const std::string *Date::getDaysOfWeek() const {
+const std::vector<std::string> &Date::getDaysOfWeek() const {
     return daysOfWeek;
 }
 

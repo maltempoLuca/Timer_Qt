@@ -6,6 +6,7 @@
 #define TIMER_QT_DATE_H
 
 #include <string>
+#include <vector>
 
 enum DateFormat {
     YMD, DMY, MDY, ReducedFormat
@@ -37,7 +38,7 @@ public:
 
     void setYear(int year);
 
-    const std::string *getDaysOfWeek() const;
+    const std::vector<std::string> &getDaysOfWeek() const;
 
 private:
     void verifyLeapYear(int year);
@@ -49,8 +50,7 @@ private:
     int day, dayOfWeek, month, year;
     bool isLeapYear;
     DateFormat dateFormat;
-    const std::string daysOfWeek[7] = {"Monday", "Tuesday", "Wednesday",
-                                       "Thursday", "Friday", "Saturday", "Sunday"};
+    const std::vector<std::string> daysOfWeek;
 };
 
 
