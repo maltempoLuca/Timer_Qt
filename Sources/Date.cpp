@@ -8,7 +8,7 @@
 Date::Date() {
     QDate qDate = QDate::currentDate();
     day = qDate.day();
-    dayOfWeek = qDate.dayOfWeek();
+    dayOfWeek = qDate.dayOfWeek() - 1;
     month = qDate.month();
     year = qDate.year();
     isLeapYear = qDate.isLeapYear(year);
@@ -30,6 +30,7 @@ int Date::getDay() const {
 
 void Date::setDay(int day) {
     Date::day = day;
+
 }
 
 int Date::getDayOfWeek() const {
@@ -37,7 +38,7 @@ int Date::getDayOfWeek() const {
 }
 
 void Date::setDayOfWeek(int dayOfWeek) {
-    Date::dayOfWeek = dayOfWeek;
+    Date::dayOfWeek = dayOfWeek % 7;
 }
 
 int Date::getMonth() const {
@@ -54,14 +55,32 @@ int Date::getYear() const {
 
 void Date::setYear(int year) {
     Date::year = year;
+    verifyLeapYear(year);
 }
 
-bool Date::isLeapYear1() const {
-    return isLeapYear;
+void Date::verifyLeapYear(int year) {
+    if (year % 4 == 0) {
+        if (year % 100 == 0) {
+            if (year % 400 == 0)
+                setIsLeapYear(true);
+            else
+                setIsLeapYear(false);
+        } else
+            setIsLeapYear(true);
+    } else
+        setIsLeapYear(false);
 }
 
 void Date::setIsLeapYear(bool isLeapYear) {
     Date::isLeapYear = isLeapYear;
+}
+
+bool Date::getIsLeapYear() const {
+    return isLeapYear;
+}
+
+const std::string *Date::getDaysOfWeek() const {
+    return daysOfWeek;
 }
 
 

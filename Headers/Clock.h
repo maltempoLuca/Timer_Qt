@@ -11,27 +11,31 @@
 #include <QTimer>
 #include <QDate>
 #include <iostream>
-
+#include <iomanip>
 
 class Clock : public QObject {
 Q_OBJECT
 public:
     Clock();
 
-    void getDATE();
+    void printFullDate();
 
     virtual ~Clock();
 
-    void getTIME();
+    void printFullTime();
 
-public slots:
+private slots:
 
-    void increase();
+    void increaseOneSecond();
 
 private:
     Date date;
     Time time;
     QTimer *qTimer;
+
+    void setNextDay();
+
+    bool isNotLastDayOfMonth();
 };
 
 

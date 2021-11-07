@@ -10,47 +10,36 @@ Time::Time() {
     hours = qTime.hour();
     minutes = qTime.minute();
     seconds = qTime.second();
-    milliSeconds = qTime.msec();
     timeFormat = Format12h;
 }
 
-Time::Time(int milliSeconds, int seconds, int minutes, int hours, TimeFormat timeFormat) : milliSeconds(milliSeconds),
-                                                                                           seconds(seconds),
-                                                                                           minutes(minutes),
-                                                                                           hours(hours),
-                                                                                           timeFormat(timeFormat) {}
-
-
-int Time::getMilliSeconds() const {
-    return milliSeconds;
-}
-
-void Time::setMilliSeconds(int milliSeconds) {
-    Time::milliSeconds = milliSeconds;
-}
+Time::Time(int seconds, int minutes, int hours, TimeFormat timeFormat) : seconds(seconds),
+                                                                         minutes(minutes),
+                                                                         hours(hours),
+                                                                         timeFormat(timeFormat) {}
 
 int Time::getSeconds() const {
     return seconds;
 }
 
-void Time::setSeconds(int seconds) {
-    Time::seconds = seconds;
+void Time::setSeconds(int secondsParameter) {
+    Time::seconds = secondsParameter;
 }
 
 int Time::getMinutes() const {
     return minutes;
 }
 
-void Time::setMinutes(int minutes) {
-    Time::minutes = minutes;
+void Time::setMinutes(int minutesParameter) {
+    Time::minutes = minutesParameter;
 }
 
 int Time::getHours() const {
     return hours;
 }
 
-void Time::setHours(int hours) {
-    Time::hours = hours;
+void Time::setHours(int hoursParameter) {
+    Time::hours = hoursParameter;
 }
 
 

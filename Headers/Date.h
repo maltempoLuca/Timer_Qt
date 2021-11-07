@@ -31,11 +31,16 @@ public:
 
     void setMonth(int month);
 
+    bool getIsLeapYear() const;
+
     int getYear() const;
 
     void setYear(int year);
 
-    bool isLeapYear1() const;
+    const std::string *getDaysOfWeek() const;
+
+private:
+    void verifyLeapYear(int year);
 
     void setIsLeapYear(bool isLeapYear);
 
@@ -44,9 +49,8 @@ private:
     int day, dayOfWeek, month, year;
     bool isLeapYear;
     DateFormat dateFormat;
-    std::string daysOfWeek[7] = {"Monday", "Tuesday", "Wednesday",
-                                 "Thursday", "Friday", "Saturday",
-                                 "Sunday"};
+    const std::string daysOfWeek[7] = {"Monday", "Tuesday", "Wednesday",
+                                       "Thursday", "Friday", "Saturday", "Sunday"};
 };
 
 

@@ -12,6 +12,5 @@ int main(int argc, char *argv[]) {
     mainWindow w;
     w.show();
     Clock clock;
-    std::cout << "pippo";
     return a.exec();
 }

@@ -13,12 +13,9 @@ class Time {
 public:
     Time();
 
-    Time(int milliSeconds, int seconds, int minutes, int hours, TimeFormat = Format24h);
+    Time(int seconds, int minutes, int hours, TimeFormat = Format24h);
 
 public:
-    int getMilliSeconds() const;
-
-    void setMilliSeconds(int milliSeconds);
 
     int getSeconds() const;
 
@@ -33,7 +30,7 @@ public:
     void setHours(int hours);
 
 private:
-    int milliSeconds, seconds, minutes, hours;
+    int seconds, minutes, hours;
     TimeFormat timeFormat;
 
 };
