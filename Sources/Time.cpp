@@ -22,24 +22,30 @@ int Time::getSeconds() const {
     return seconds;
 }
 
-void Time::setSeconds(int secondsParameter) {
-    Time::seconds = secondsParameter;
+void Time::setSeconds(int seconds) {
+    if (seconds >= 0 && seconds < 60) {
+        Time::seconds = seconds;
+    }
 }
 
 int Time::getMinutes() const {
     return minutes;
 }
 
-void Time::setMinutes(int minutesParameter) {
-    Time::minutes = minutesParameter;
+void Time::setMinutes(int minutes) {
+    if (minutes >= 0 && minutes < 60) {
+        Time::minutes = minutes;
+    }
 }
 
 int Time::getHours() const {
     return hours;
 }
 
-void Time::setHours(int hoursParameter) {
-    Time::hours = hoursParameter;
+void Time::setHours(int hours) {
+    if (hours >= 0 && hours < 24) {
+        Time::hours = hours;
+    }
 }
 
 

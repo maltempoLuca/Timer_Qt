@@ -16,7 +16,7 @@ class Date {
 public:
     Date();
 
-    Date(int day, int dayOfWeek, int month, int year, bool isLeapYear, DateFormat dateFormat = DMY);
+//    Date(int day, int dayOfWeek, int month, int year, bool isLeapYear, DateFormat dateFormat = DMY);
 
     ~Date();
 
@@ -40,10 +40,14 @@ public:
 
     const std::vector<std::string> &getDaysOfWeek() const;
 
+    bool isNotLastDayOfMonth();
+
 private:
     void verifyLeapYear(int year);
 
     void setIsLeapYear(bool isLeapYear);
+
+    bool isValidDay(int newDay) const;
 
 
 private:

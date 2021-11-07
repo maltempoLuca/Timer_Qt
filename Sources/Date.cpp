@@ -16,21 +16,22 @@ Date::Date() : daysOfWeek({"Monday", "Tuesday", "Wednesday",
     dateFormat = DMY;
 }
 
-Date::Date(int day, int dayOfWeek, int month, int year, bool isLeapYear, DateFormat dateFormat) :
-        daysOfWeek({"Monday", "Tuesday", "Wednesday",
-                    "Thursday", "Friday", "Saturday", "Sunday"}),
-        day(day),
-        dayOfWeek(dayOfWeek),
-        month(month),
-        year(year),
-        isLeapYear(isLeapYear),
-        dateFormat(dateFormat) {}
+//Date::Date(int day, int dayOfWeek, int month, int year, bool isLeapYear, DateFormat dateFormat) :
+//        daysOfWeek({"Monday", "Tuesday", "Wednesday",
+//                    "Thursday", "Friday", "Saturday", "Sunday"}),
+//        day(day),
+//        dayOfWeek(dayOfWeek),
+//        month(month),
+//        year(year),
+//        isLeapYear(isLeapYear),
+//        dateFormat(dateFormat) {}
 
 int Date::getDay() const {
     return day;
 }
 
 void Date::setDay(int day) {
+    isValidDay(day);
     Date::day = day;
 
 }
@@ -48,7 +49,9 @@ int Date::getMonth() const {
 }
 
 void Date::setMonth(int month) {
-    Date::month = month;
+    if (month > 0 && month < 13) {
+        Date::month = month;
+    }
 }
 
 int Date::getYear() const {
@@ -56,8 +59,10 @@ int Date::getYear() const {
 }
 
 void Date::setYear(int year) {
-    Date::year = year;
-    verifyLeapYear(year);
+    if (year >= 0) {
+        Date::year = year;
+        verifyLeapYear(year);
+    }
 }
 
 void Date::verifyLeapYear(int year) {
@@ -83,6 +88,30 @@ bool Date::getIsLeapYear() const {
 
 const std::vector<std::string> &Date::getDaysOfWeek() const {
     return daysOfWeek;
+}
+
+bool Date::isValidDay(int newDay) const {
+    if (newDay > 0) {
+        if (((month <= 7) && (month % 2 == 1)) || ((month > 7) && month % 2 == 0)) {
+            return (newDay < 32);
+        } else {
+            if (month != 2) {
+                return (newDay < 31);
+            } else {
+                if (getIsLeapYear()) {
+                    return (newDay < 30);
+                } else {
+                    return (newDay < 29);
+                }
+            }
+        }
+    } else {
+        return false;
+    }
+}
+
+bool Date::isNotLastDayOfMonth() {
+    return isValidDay(day + 1);
 }
 
 

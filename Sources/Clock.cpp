@@ -48,7 +48,7 @@ void Clock::increaseOneSecond() {
 }
 
 void Clock::setNextDay() {
-    if (isNotLastDayOfMonth()) {
+    if (date.isNotLastDayOfMonth()) {
         date.setDay(date.getDay() + 1);
         date.setDayOfWeek(date.getDayOfWeek() + 1);
     } else {
@@ -59,23 +59,6 @@ void Clock::setNextDay() {
         } else {
             date.setMonth(1);
             date.setYear(date.getYear() + 1);
-        }
-    }
-}
-
-bool Clock::isNotLastDayOfMonth() {
-    int currentMonth = date.getMonth();
-    if (((currentMonth <= 7) && (currentMonth % 2 == 1)) || ((currentMonth > 7) && currentMonth % 2 == 0)) {
-        return (date.getDay() < 31);
-    } else {
-        if (currentMonth != 2) {
-            return (date.getDay() < 30);
-        } else {
-            if (date.getIsLeapYear()) {
-                return (date.getDay() < 29);
-            } else {
-                return (date.getDay() < 28);
-            }
         }
     }
 }
