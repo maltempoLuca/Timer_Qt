@@ -29,6 +29,8 @@ int Date::getDay() const {
 void Date::setDay(int day) {
     if (isValidDay(day)) {
         Date::day = day;
+    } else {
+        throw std::invalid_argument("Invalid day");
     }
 }
 
@@ -39,6 +41,8 @@ int Date::getDayOfWeek() const {
 void Date::setDayOfWeek(int dayOfWeek) {
     if (dayOfWeek > -1) {
         Date::dayOfWeek = dayOfWeek % 7;
+    } else {
+        throw std::invalid_argument("Invalid dayOfWeek");
     }
 }
 
@@ -49,6 +53,8 @@ int Date::getMonth() const {
 void Date::setMonth(int month) {
     if (month > 0 && month < 13) {
         Date::month = month;
+    } else {
+        throw std::invalid_argument("Invalid month");
     }
 }
 
@@ -60,6 +66,8 @@ void Date::setYear(int year) {
     if (year >= 0) {
         Date::year = year;
         verifyLeapYear(year);
+    } else {
+        throw std::invalid_argument("Invalid year");
     }
 }
 

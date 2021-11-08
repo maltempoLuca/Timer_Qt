@@ -40,14 +40,14 @@ public:
 
     void setYear(int year);
 
-    void setIsLeapYear(bool isLeapYear);
-
     const std::vector<std::string> &getDaysOfWeek() const;
 
 private:
     void verifyLeapYear(int year);
 
     bool isValidDay(int newDay);
+
+    void setIsLeapYear(bool isLeapYear);
 
 
 private:

@@ -16,7 +16,7 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
-set(SOURCE_FILES Sources/claase_per_provare_googleTest.cpp Headers/claase_per_provare_googleTest.h
+set(SOURCE_FILES
         Sources/Date.cpp Headers/Date.h Sources/Clock.cpp Headers/Clock.h
         Sources/mainwindow.cpp Headers/mainwindow.h Sources/Time.cpp Headers/Time.h)
 
