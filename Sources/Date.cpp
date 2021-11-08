@@ -98,7 +98,7 @@ bool Date::isValidDay(int newDay) const {
             if (month != 2) {
                 return (newDay < 31);
             } else {
-                if (getIsLeapYear()) {
+                if (isLeapYear) {
                     return (newDay < 30);
                 } else {
                     return (newDay < 29);

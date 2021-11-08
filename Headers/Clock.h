@@ -29,13 +29,14 @@ private slots:
     void increaseOneSecond();
 
 private:
-    Date date;
-    Time time;
+    const std::unique_ptr<Date> date;
+    const std::unique_ptr<Time> time;
     QTimer *qTimer;
+    static const int OneSecondInMilliSecond;
 
-    void setNextDay();
+    void increaseOneDay();
 
-    bool isNotLastDayOfMonth();
+
 };
 
 
