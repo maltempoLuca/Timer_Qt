@@ -37,7 +37,9 @@ int Date::getDayOfWeek() const {
 }
 
 void Date::setDayOfWeek(int dayOfWeek) {
-    Date::dayOfWeek = dayOfWeek % 7;
+    if (dayOfWeek > -1) {
+        Date::dayOfWeek = dayOfWeek % 7;
+    }
 }
 
 int Date::getMonth() const {
@@ -82,6 +84,10 @@ bool Date::getIsLeapYear() const {
     return isLeapYear;
 }
 
+bool Date::isLastDayOfMonth() const {
+    return lastDayOfMonth;
+}
+
 const std::vector<std::string> &Date::getDaysOfWeek() const {
     return daysOfWeek;
 }
@@ -109,10 +115,6 @@ bool Date::isValidDay(int newDay) {
     } else {
         return false;
     }
-}
-
-bool Date::isLastDayOfMonth() const {
-    return lastDayOfMonth;
 }
 
 

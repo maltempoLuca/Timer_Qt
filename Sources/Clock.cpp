@@ -6,7 +6,6 @@
 
 const int Clock::OneSecondInMilliSecond = 1000;
 
-
 Clock::Clock() : date(std::make_unique<Date>()), time(std::make_unique<Time>()) {
     qTimer = new QTimer(this);
     connect(qTimer, SIGNAL(timeout()), this, SLOT(increaseOneSecond()));
@@ -51,12 +50,11 @@ void Clock::increaseOneSecond() {
 }
 
 void Clock::increaseOneDay() {
+    date->setDayOfWeek(date->getDayOfWeek() + 1);
     if (!date->isLastDayOfMonth()) {
         date->setDay(date->getDay() + 1);
-        date->setDayOfWeek(date->getDayOfWeek() + 1);
     } else {
         date->setDay(1);
-        date->setDayOfWeek(date->getDayOfWeek() + 1);
         if (date->getMonth() < 12) {
             date->setMonth(date->getMonth() + 1);
         } else {
