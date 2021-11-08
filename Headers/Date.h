@@ -7,6 +7,8 @@
 
 #include <string>
 #include <vector>
+#include <iostream>
+
 
 enum DateFormat {
     YMD, DMY, MDY, ReducedFormat
@@ -42,12 +44,22 @@ public:
 
     const std::vector<std::string> &getDaysOfWeek() const;
 
+    void setFullDate(int day, int month, int year);
+
+    std::string getFullDate();
+
+    void setDateFormat(DateFormat dateFormat);
+
 private:
     void verifyLeapYear(int year);
 
     bool isValidDay(int newDay);
 
     void setIsLeapYear(bool isLeapYear);
+
+    bool isValidMonth(int newMonth);
+
+    bool isValidYear(int newYear);
 
 
 private:
@@ -57,9 +69,7 @@ private:
     DateFormat dateFormat;
     const std::vector<std::string> daysOfWeek;
 
-    bool isValidMonth(int newMonth);
 
-    bool isValidYear(int newYear);
 };
 
 

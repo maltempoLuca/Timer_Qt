@@ -21,6 +21,44 @@ void Date::initializeDate() {
 
 Date::~Date() = default;
 
+void Date::setFullDate(int day, int month, int year) {
+    int currentDay = Date::day;
+    int currentMonth = Date::month;
+    int currentYear = Date::year;
+    try {
+        setYear(year);
+        Date::day = 1;
+        Date::month = 1;
+        setMonth(month);
+        setDay(day);
+    } catch (const std::invalid_argument &e) {
+        std::cout << e.what();
+        Date::day = currentDay;
+        Date::month = currentMonth;
+        Date::year = currentYear;
+    }
+}
+
+void Date::setDateFormat(DateFormat dateFormat) {
+    Date::dateFormat = dateFormat;
+}
+
+std::string Date::getFullDate() {
+    switch (dateFormat) {
+        case DMY :
+            return std::to_string(day) + "/" + std::to_string(month) + "/" + std::to_string(year);
+            break;
+        case MDY :
+            return std::to_string(month) + "/" + std::to_string(day) + "/" + std::to_string(year);
+            break;
+        case YMD:
+            return std::to_string(year) + "/" + std::to_string(month) + "/" + std::to_string(day);
+            break;
+        case ReducedFormat:
+            return std::to_string(day) + "/" + std::to_string(month);
+            break;
+    }
+}
 
 int Date::getDay() const {
     return day;

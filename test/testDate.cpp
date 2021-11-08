@@ -5,7 +5,7 @@
 #define ASSERT_EXCEPTION(TRY_BLOCK, EXCEPTION_TYPE, MESSAGE){             \
     try                                                                   \
     {                                                                     \
-        TRY_BLOCK                                                         \
+        TRY_BLOCK;                                                        \
         FAIL() << "exception '" << MESSAGE << "' not thrown at all!";     \
     }                                                                     \
     catch( const EXCEPTION_TYPE& e )                                      \
@@ -15,7 +15,7 @@
                "message:\n\n"                                             \
             << MESSAGE << "\n";                                           \
     }                                                                     \
-    catch( ... )                                                          \
+    catch(...)                                                            \
     {                                                                     \
         FAIL() << "exception '" << MESSAGE                                \
                << "' not thrown with expected type '" << #EXCEPTION_TYPE  \
@@ -32,9 +32,33 @@ TEST(DateTest, DefaultConstructor) {
     ASSERT_EQ(qDate.year(), date.getYear());
 }
 
-TEST(DateTest, InsertingWrongDay) {
+TEST(DateTest, InsertingInvalidDayMonthYear) {
     Date date;
-    ASSERT_EXCEPTION(date.setDay(0);, std::invalid_argument, "Invalid day");
+    ASSERT_EXCEPTION(date.setDay(0), std::invalid_argument, "Invalid day");
+    ASSERT_EXCEPTION(date.setDay(-1), std::invalid_argument, "Invalid day");
+    ASSERT_EXCEPTION(date.setDay(32), std::invalid_argument, "Invalid day");
+    ASSERT_EXCEPTION(date.setMonth(0), std::invalid_argument, "Invalid month");
+    ASSERT_EXCEPTION(date.setMonth(-1), std::invalid_argument, "Invalid month");
+    ASSERT_EXCEPTION(date.setYear(-1), std::invalid_argument, "Invalid year");
 }
 
+TEST(DateTest, isLeapYearTest) {
+    Date date;
+    date.setFullDate(1, 1, 2016);
+    ASSERT_TRUE(date.getIsLeapYear());
+    date.setFullDate(1, 1, 2016);
+    ASSERT_TRUE(date.getIsLeapYear());
+}
 
+TEST(DateTest, DateFormatTest) {
+    Date date;
+    date.setFullDate(24, 4, 1998);
+    date.setDateFormat(DMY);
+    ASSERT_EQ(date.getFullDate(), "24/4/1998");
+    date.setDateFormat(MDY);
+    ASSERT_EQ(date.getFullDate(), "4/24/1998");
+    date.setDateFormat(YMD);
+    ASSERT_EQ(date.getFullDate(), "1998/4/24");
+    date.setDateFormat(ReducedFormat);
+    ASSERT_EQ(date.getFullDate(), "24/4");
+}
