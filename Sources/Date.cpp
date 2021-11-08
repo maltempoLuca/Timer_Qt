@@ -51,7 +51,7 @@ int Date::getMonth() const {
 }
 
 void Date::setMonth(int month) {
-    if (month > 0 && month < 13) {
+    if (isValidMonth(month)) {
         Date::month = month;
     } else {
         throw std::invalid_argument("Invalid month");
@@ -63,7 +63,7 @@ int Date::getYear() const {
 }
 
 void Date::setYear(int year) {
-    if (year >= 0) {
+    if (isValidYear(year)) {
         Date::year = year;
         verifyLeapYear(year);
     } else {
@@ -124,6 +124,41 @@ bool Date::isValidDay(int newDay) {
         return false;
     }
 }
+
+bool Date::isValidMonth(int newMonth) {
+    int currentMonth = month;
+    if (newMonth > 0 && newMonth < 13) {
+        month = newMonth;
+        if (isValidDay(day)) {
+            month = currentMonth;
+            return true;
+        } else {
+            month = currentMonth;
+            return false;
+        }
+    } else {
+        return false;
+    }
+}
+
+bool Date::isValidYear(int newYear) {
+    int currentYear = year;
+    if (newYear >= 0) {
+        year = newYear;
+        if (isValidDay(day)) {
+            year = currentYear;
+            return true;
+        } else {
+            year = currentYear;
+            return false;
+        }
+    } else {
+        return false;
+    }
+}
+
+
+
 
 
 

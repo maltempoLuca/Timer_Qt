@@ -57,6 +57,9 @@ private:
     DateFormat dateFormat;
     const std::vector<std::string> daysOfWeek;
 
+    bool isValidMonth(int newMonth);
+
+    bool isValidYear(int newYear);
 };
 
 
