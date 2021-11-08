@@ -23,13 +23,18 @@
     }                                                                     \
 }
 
-TEST(DateTest, DefaultConstructor) {
+TEST(DateTest, DefaultConstructorTest) {
     Date date;
     QDate qDate = QDate::currentDate();;
     ASSERT_EQ(qDate.day(), date.getDay());
     ASSERT_EQ(qDate.dayOfWeek() - 1, date.getDayOfWeek());
     ASSERT_EQ(qDate.month(), date.getMonth());
     ASSERT_EQ(qDate.year(), date.getYear());
+}
+
+TEST(DateTest, NonDefaultConstructorTEST) {
+    Date date = Date(24, 4, 1998);
+    ASSERT_EQ(date.getFullDate(), "24/4/1998");
 }
 
 TEST(DateTest, InsertingInvalidDayMonthYear) {

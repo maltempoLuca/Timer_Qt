@@ -18,6 +18,8 @@ class Date {
 public:
     Date();
 
+    Date(int day, int month, int year);
+
     ~Date();
 
     void initializeDate();

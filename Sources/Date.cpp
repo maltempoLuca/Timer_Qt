@@ -11,6 +11,10 @@ Date::Date() : day(0), dayOfWeek(0), month(0), year(0), isLeapYear(false), lastD
     initializeDate();
 }
 
+Date::Date(int day, int month, int year) : Date() {
+    setFullDate(day, month, year);
+}
+
 void Date::initializeDate() {
     QDate qDate = QDate::currentDate();
     setDay(qDate.day());
