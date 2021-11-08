@@ -13,7 +13,7 @@ class Time {
 public:
     Time();
 
-    Time(int seconds, int minutes, int hours, TimeFormat = Format24h);
+    void initializeTime();
 
 public:
 

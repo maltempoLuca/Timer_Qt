@@ -5,35 +5,31 @@
 #include <QDate>
 #include "../Headers/Date.h"
 
-Date::Date() : daysOfWeek({"Monday", "Tuesday", "Wednesday",
+Date::Date() : day(0), dayOfWeek(0), month(0), year(0), isLeapYear(false), lastDayOfMonth(false), dateFormat(DMY),
+               daysOfWeek({"Monday", "Tuesday", "Wednesday",
                            "Thursday", "Friday", "Saturday", "Sunday"}) {
-    QDate qDate = QDate::currentDate();
-    day = qDate.day();
-    dayOfWeek = qDate.dayOfWeek() - 1;
-    month = qDate.month();
-    year = qDate.year();
-    isLeapYear = qDate.isLeapYear(year);
-    dateFormat = DMY;
+    initializeDate();
 }
 
-//Date::Date(int day, int dayOfWeek, int month, int year, bool isLeapYear, DateFormat dateFormat) :
-//        daysOfWeek({"Monday", "Tuesday", "Wednesday",
-//                    "Thursday", "Friday", "Saturday", "Sunday"}),
-//        day(day),
-//        dayOfWeek(dayOfWeek),
-//        month(month),
-//        year(year),
-//        isLeapYear(isLeapYear),
-//        dateFormat(dateFormat) {}
+void Date::initializeDate() {
+    QDate qDate = QDate::currentDate();
+    setDay(qDate.day());
+    setDayOfWeek(qDate.dayOfWeek() - 1);
+    setMonth(qDate.month());
+    setYear(qDate.year());
+}
+
+Date::~Date() = default;
+
 
 int Date::getDay() const {
     return day;
 }
 
 void Date::setDay(int day) {
-    isValidDay(day);
-    Date::day = day;
-
+    if (isValidDay(day)) {
+        Date::day = day;
+    }
 }
 
 int Date::getDayOfWeek() const {
@@ -90,17 +86,22 @@ const std::vector<std::string> &Date::getDaysOfWeek() const {
     return daysOfWeek;
 }
 
-bool Date::isValidDay(int newDay) const {
+bool Date::isValidDay(int newDay) {
     if (newDay > 0) {
+        lastDayOfMonth = false;
         if (((month <= 7) && (month % 2 == 1)) || ((month > 7) && month % 2 == 0)) {
+            if (newDay == 31) lastDayOfMonth = true;
             return (newDay < 32);
         } else {
             if (month != 2) {
+                if (newDay == 30) lastDayOfMonth = true;
                 return (newDay < 31);
             } else {
                 if (isLeapYear) {
+                    if (newDay == 29) lastDayOfMonth = true;
                     return (newDay < 30);
                 } else {
+                    if (newDay == 28) lastDayOfMonth = true;
                     return (newDay < 29);
                 }
             }
@@ -110,9 +111,9 @@ bool Date::isValidDay(int newDay) const {
     }
 }
 
-bool Date::isNotLastDayOfMonth() {
-    return isValidDay(day + 1);
+bool Date::isLastDayOfMonth() const {
+    return lastDayOfMonth;
 }
 
 
-Date::~Date() = default;
+

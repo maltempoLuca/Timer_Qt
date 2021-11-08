@@ -5,18 +5,16 @@
 #include <QTime>
 #include "../Headers/Time.h"
 
-Time::Time() {
-    QTime qTime = QTime::currentTime();
-    hours = qTime.hour();
-    minutes = qTime.minute();
-    seconds = qTime.second();
-    timeFormat = Format12h;
+Time::Time() : seconds(0), minutes(0), hours(0), timeFormat(Format24h) {
+    initializeTime();
 }
 
-Time::Time(int seconds, int minutes, int hours, TimeFormat timeFormat) : seconds(seconds),
-                                                                         minutes(minutes),
-                                                                         hours(hours),
-                                                                         timeFormat(timeFormat) {}
+void Time::initializeTime() {
+    QTime qTime = QTime::currentTime();
+    setHours(qTime.hour());
+    setMinutes(qTime.minute());
+    setSeconds(qTime.second());
+}
 
 int Time::getSeconds() const {
     return seconds;

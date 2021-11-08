@@ -51,7 +51,7 @@ void Clock::increaseOneSecond() {
 }
 
 void Clock::increaseOneDay() {
-    if (date->isNotLastDayOfMonth()) {
+    if (!date->isLastDayOfMonth()) {
         date->setDay(date->getDay() + 1);
         date->setDayOfWeek(date->getDayOfWeek() + 1);
     } else {
