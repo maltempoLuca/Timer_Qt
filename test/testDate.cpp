@@ -2,26 +2,6 @@
 #include "gtest/gtest.h"
 #include "../Headers/Date.h"
 
-#define ASSERT_EXCEPTION(TRY_BLOCK, EXCEPTION_TYPE, MESSAGE){             \
-    try                                                                   \
-    {                                                                     \
-        TRY_BLOCK;                                                        \
-        FAIL() << "exception '" << MESSAGE << "' not thrown at all!";     \
-    }                                                                     \
-    catch( const EXCEPTION_TYPE& e )                                      \
-    {                                                                     \
-        ASSERT_STREQ( MESSAGE, e.what() )                                 \
-            << " exception message is incorrect. Expected the following " \
-               "message:\n\n"                                             \
-            << MESSAGE << "\n";                                           \
-    }                                                                     \
-    catch(...)                                                            \
-    {                                                                     \
-        FAIL() << "exception '" << MESSAGE                                \
-               << "' not thrown with expected type '" << #EXCEPTION_TYPE  \
-               << "'!";                                                   \
-    }                                                                     \
-}
 
 TEST(DateTest, DefaultConstructorTest) {
     Date date;
@@ -45,20 +25,28 @@ TEST(DateTest, NonDefaultConstructorTEST) {
 
 TEST(DateTest, InsertingInvalidDayMonthYear) {
     Date date;
-    ASSERT_EXCEPTION(date.setDay(0), std::invalid_argument, "Invalid day");
-    ASSERT_EXCEPTION(date.setDay(-1), std::invalid_argument, "Invalid day");
-    ASSERT_EXCEPTION(date.setDay(32), std::invalid_argument, "Invalid day");
-    ASSERT_EXCEPTION(date.setMonth(0), std::invalid_argument, "Invalid month");
-    ASSERT_EXCEPTION(date.setMonth(-1), std::invalid_argument, "Invalid month");
-    ASSERT_EXCEPTION(date.setYear(-1), std::invalid_argument, "Invalid year");
+    ASSERT_THROW(date.setDay(0), std::invalid_argument);
+    ASSERT_THROW(date.setDay(-1), std::invalid_argument);
+    ASSERT_THROW(date.setDay(32), std::invalid_argument);
+    ASSERT_THROW(date.setMonth(0), std::invalid_argument);
+    ASSERT_THROW(date.setMonth(-1), std::invalid_argument);
+    ASSERT_THROW(date.setYear(-1), std::invalid_argument);
+}
+
+TEST(DateTest, InsertingInvalidFullDate) {
+    Date date;
+    date.setFullDate(29, 2, 1998);  // 1998 is not leap.
+    ASSERT_NE(date.getFullDate(), "29/2/1998");
+    date.setFullDate(29, 2, 2000);  // 2000 is leap.
+    ASSERT_EQ(date.getFullDate(), "29/2/2000");
 }
 
 TEST(DateTest, isLeapYearTest) {
     Date date;
     date.setFullDate(1, 1, 2016);
     ASSERT_TRUE(date.getIsLeapYear());
-    date.setFullDate(1, 1, 2016);
-    ASSERT_TRUE(date.getIsLeapYear());
+    date.setFullDate(1, 1, 2018);
+    ASSERT_FALSE(date.getIsLeapYear());
 }
 
 TEST(DateTest, DateFormatTest) {

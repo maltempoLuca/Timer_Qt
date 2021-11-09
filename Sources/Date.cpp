@@ -24,6 +24,7 @@ void Date::initializeDate() {
     setYear(qDate.year());
 }
 
+//TODO: capisci come gestire queste eccezioni lanciate.
 void Date::setDay(int day) {
     if (isValidDay(day)) {
         Date::day = day;
@@ -160,6 +161,7 @@ void Date::setDateFormat(DateFormat dateFormat) {
     Date::dateFormat = dateFormat;
 }
 
+//TODO: capisci come ritornare stringhe.
 std::string Date::getFullDate() const {
     switch (dateFormat) {
         case DMY :
