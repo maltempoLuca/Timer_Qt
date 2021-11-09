@@ -17,7 +17,7 @@ Clock::~Clock() {
 }
 
 void Clock::printFullDate() {
-    std::cout << "Date: " << date->getDaysOfWeek()[date->getDayOfWeek()] << " " << date->getDay() << "/"
+    std::cout << "Date: " << date->gateDayOfWeekAsString() << " " << date->getDay() << "/"
               << date->getMonth()
               << "/" << date->getYear() << std::endl;
 }

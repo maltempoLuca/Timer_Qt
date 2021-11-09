@@ -6,35 +6,36 @@
 #include "../Headers/Date.h"
 
 Date::Date() : day(0), dayOfWeek(0), month(0), year(0), isLeapYear(false), lastDayOfMonth(false), dateFormat(DMY),
-               daysOfWeek({"Monday", "Tuesday", "Wednesday",
-                           "Thursday", "Friday", "Saturday", "Sunday"}) {
+               daysOfWeek({"Sunday", "Monday", "Tuesday", "Wednesday",
+                           "Thursday", "Friday", "Saturday"}) {
     initializeDate();
 }
 
 Date::Date(int day, int month, int year) : Date() {
     setFullDate(day, month, year);
+    setDayOfWeekFromCurrentDate();
 }
 
 void Date::initializeDate() {
     QDate qDate = QDate::currentDate();
     setDay(qDate.day());
-    setDayOfWeek(qDate.dayOfWeek() - 1);
     setMonth(qDate.month());
     setYear(qDate.year());
+    setDayOfWeekFromCurrentDate();
 }
 
 Date::~Date() = default;
 
-void Date::setFullDate(int day, int month, int year) {
+void Date::setFullDate(int newDay, int newMonth, int newYear) {
     int currentDay = Date::day;
     int currentMonth = Date::month;
     int currentYear = Date::year;
     try {
-        setYear(year);
+        setYear(newYear);
         Date::day = 1;
         Date::month = 1;
-        setMonth(month);
-        setDay(day);
+        setMonth(newMonth);
+        setDay(newDay);
     } catch (const std::invalid_argument &e) {
         std::cout << e.what();
         Date::day = currentDay;
@@ -78,6 +79,16 @@ void Date::setDay(int day) {
 
 int Date::getDayOfWeek() const {
     return dayOfWeek;
+}
+
+void Date::setDayOfWeekFromCurrentDate() {
+    int localMonth = month;
+    int localYear = year;
+    int localDay = day;
+
+    static const int t[] = {0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4};
+    localYear -= localMonth < 3;
+    setDayOfWeek(localYear + localYear / 4 - localYear / 100 + localYear / 400 + t[localMonth - 1] + localDay);
 }
 
 void Date::setDayOfWeek(int dayOfWeek) {
@@ -138,9 +149,10 @@ bool Date::isLastDayOfMonth() const {
     return lastDayOfMonth;
 }
 
-const std::vector<std::string> &Date::getDaysOfWeek() const {
-    return daysOfWeek;
+std::string Date::gateDayOfWeekAsString() const {
+    return daysOfWeek[dayOfWeek];
 }
+
 
 bool Date::isValidDay(int newDay) {
     if (newDay > 0) {

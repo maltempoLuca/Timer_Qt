@@ -27,14 +27,20 @@ TEST(DateTest, DefaultConstructorTest) {
     Date date;
     QDate qDate = QDate::currentDate();;
     ASSERT_EQ(qDate.day(), date.getDay());
-    ASSERT_EQ(qDate.dayOfWeek() - 1, date.getDayOfWeek());
     ASSERT_EQ(qDate.month(), date.getMonth());
     ASSERT_EQ(qDate.year(), date.getYear());
 }
 
 TEST(DateTest, NonDefaultConstructorTEST) {
-    Date date = Date(24, 4, 1998);
-    ASSERT_EQ(date.getFullDate(), "24/4/1998");
+    Date date0 = Date(12, 10, 1492);
+    Date date1 = Date(24, 4, 1998);
+    Date date2 = Date(29, 2, 2020);
+    ASSERT_EQ(date0.getFullDate(), "12/10/1492");
+    ASSERT_EQ(date0.gateDayOfWeekAsString(), "Wednesday");
+    ASSERT_EQ(date1.getFullDate(), "24/4/1998");
+    ASSERT_EQ(date1.gateDayOfWeekAsString(), "Friday");
+    ASSERT_EQ(date2.getFullDate(), "29/2/2020");
+    ASSERT_EQ(date2.gateDayOfWeekAsString(), "Saturday");
 }
 
 TEST(DateTest, InsertingInvalidDayMonthYear) {
