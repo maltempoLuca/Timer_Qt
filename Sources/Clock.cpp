@@ -17,7 +17,7 @@ Clock::~Clock() {
 }
 
 void Clock::printFullDate() {
-    std::cout << "Date: " << date->gateDayOfWeekAsString() << " " << date->getDay() << "/"
+    std::cout << "Date: " << date->gatDayOfWeekAsString() << " " << date->getDay() << "/"
               << date->getMonth()
               << "/" << date->getYear() << std::endl;
 }
@@ -50,7 +50,6 @@ void Clock::increaseOneSecond() {
 }
 
 void Clock::increaseOneDay() {
-    date->setDayOfWeek(date->getDayOfWeek() + 1);
     if (!date->isLastDayOfMonth()) {
         date->setDay(date->getDay() + 1);
     } else {

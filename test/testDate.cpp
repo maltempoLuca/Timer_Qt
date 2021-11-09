@@ -36,11 +36,11 @@ TEST(DateTest, NonDefaultConstructorTEST) {
     Date date1 = Date(24, 4, 1998);
     Date date2 = Date(29, 2, 2020);
     ASSERT_EQ(date0.getFullDate(), "12/10/1492");
-    ASSERT_EQ(date0.gateDayOfWeekAsString(), "Wednesday");
+    ASSERT_EQ(date0.gatDayOfWeekAsString(), "Wednesday");
     ASSERT_EQ(date1.getFullDate(), "24/4/1998");
-    ASSERT_EQ(date1.gateDayOfWeekAsString(), "Friday");
+    ASSERT_EQ(date1.gatDayOfWeekAsString(), "Friday");
     ASSERT_EQ(date2.getFullDate(), "29/2/2020");
-    ASSERT_EQ(date2.gateDayOfWeekAsString(), "Saturday");
+    ASSERT_EQ(date2.gatDayOfWeekAsString(), "Saturday");
 }
 
 TEST(DateTest, InsertingInvalidDayMonthYear) {

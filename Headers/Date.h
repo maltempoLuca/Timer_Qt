@@ -24,19 +24,25 @@ public:
 
     void initializeDate();
 
-    int getDay() const;
-
     void setDay(int day);
+
+    void setMonth(int month);
+
+    void setYear(int year);
+
+    void setFullDate(int newDay, int newMonth, int newYear);
+
+    void setDateFormat(DateFormat dateFormat);
+
+    std::string getFullDate() const;
+
+    int getDay() const;
 
     int getDayOfWeek() const;
 
-    std::string gateDayOfWeekAsString() const;
-
-    void setDayOfWeek(int dayOfWeek);
+    const std::string &gatDayOfWeekAsString() const;
 
     int getMonth() const;
-
-    void setMonth(int month);
 
     bool isLastDayOfMonth() const;
 
@@ -44,21 +50,13 @@ public:
 
     int getYear() const;
 
-    void setYear(int year);
-
-    void setFullDate(int newDay, int newMonth, int newYear);
-
-    std::string getFullDate();
-
-    void setDateFormat(DateFormat dateFormat);
-
-
 private:
+
+    void setIsLeapYear(bool isLeapYear);
+
     void verifyLeapYear(int year);
 
     bool isValidDay(int newDay);
-
-    void setIsLeapYear(bool isLeapYear);
 
     bool isValidMonth(int newMonth);
 
@@ -68,7 +66,7 @@ private:
 
 
     int day, dayOfWeek, month, year;
-    bool isLeapYear;
+    bool leapYear;
     bool lastDayOfMonth;
     DateFormat dateFormat;
     const std::vector<std::string> daysOfWeek;
