@@ -7,24 +7,25 @@
 #include "../Headers/mainwindow.h"
 #include "../Formats/ui_mainwindow.h"
 #include <QDebug>
-#include <QDateTime>
 
 
 mainWindow::mainWindow(QWidget *parent)
         : QMainWindow(parent), ui(new Ui::mainWindow) {
     ui->setupUi(this);
-    timer = new QTimer(this);
-    connect(timer, SIGNAL(timeout()), this, SLOT(myfunction()));
-    //timer->start(1000);
+    clock = new Clock;
+    clock->registerObserver(this);
 }
 
 mainWindow::~mainWindow() {
     delete ui;
+    delete clock;
+
 }
 
-void mainWindow::myfunction() {
-    QTime time = QTime::currentTime();
-    QString timeText = time.toString("hh : mm : ss : zzz");
-    ui->label_dat_time->setText(timeText);
+
+void mainWindow::update() {
+    std::string currentDate = clock->getDate();
+    std::string currentTime = clock->getTime();
+    ui->label_dat_time->setText(QString::fromStdString(currentTime));
 }
 

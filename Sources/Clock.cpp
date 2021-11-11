@@ -43,8 +43,9 @@ void Clock::increaseOneSecond() {
                 }
             }
         }
-        printFullTime();
-        printFullDate();
+        notify();
+//        printFullTime();
+//        printFullDate();
     }
     catch (const std::exception &e) {
         std::cerr << e.what() << std::endl;
@@ -90,6 +91,20 @@ std::string Clock::getDate() {
 std::string Clock::getTime() {
     std::string currentTime = time->getFullTime();
     return currentTime;
+}
+
+void Clock::registerObserver(Observer *obs) {
+    observerList.push_back(obs);
+}
+
+void Clock::removeObserver(Observer *obs) {
+    observerList.remove(obs);
+}
+
+void Clock::notify() const {
+    for (Observer *obs: observerList) {
+        obs->update();
+    }
 }
 
 
