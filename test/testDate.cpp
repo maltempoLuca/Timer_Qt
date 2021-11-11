@@ -11,7 +11,7 @@ TEST(DateTest, DefaultConstructorTest) {
     ASSERT_EQ(qDate.year(), date.getYear());
 }
 
-TEST(DateTest, NonDefaultConstructorTEST) {
+TEST(DateTest, NonDefaultConstructorTest) {
     Date date0 = Date(12, 10, 1492);
     Date date1 = Date(24, 4, 1998);
     Date date2 = Date(29, 2, 2020);
@@ -23,13 +23,21 @@ TEST(DateTest, NonDefaultConstructorTEST) {
     ASSERT_EQ(date2.gatDayOfWeekAsString(), "Saturday");
 }
 
-TEST(DateTest, InsertingInvalidDayMonthYear) {
+TEST(DateTest, InsertingInvalidDay) {
     Date date;
     ASSERT_THROW(date.setDay(0), std::invalid_argument);
     ASSERT_THROW(date.setDay(-1), std::invalid_argument);
     ASSERT_THROW(date.setDay(32), std::invalid_argument);
+}
+
+TEST(DateTest, InsertingInvalidMonth) {
+    Date date;
     ASSERT_THROW(date.setMonth(0), std::invalid_argument);
     ASSERT_THROW(date.setMonth(-1), std::invalid_argument);
+}
+
+TEST(DateTest, InsertingInvalidYear) {
+    Date date;
     ASSERT_THROW(date.setYear(-1), std::invalid_argument);
 }
 
@@ -55,7 +63,6 @@ TEST(DateTest, isLastDayOfMonthTest) {
     date.setFullDate(30, 1, 2016);
     ASSERT_FALSE(date.isLastDayOfMonth());
 }
-
 
 TEST(DateTest, DateFormatTest) {
     Date date;

@@ -38,13 +38,13 @@ public:
 
     std::string getFullTime();
 
+    void setTimeFormat(TimeFormat timeFormat);
 
 private:
 
     std::string formattedIntToString(int data);
 
     int seconds, minutes, hours;
-    std::string pippo;
     TimeFormat timeFormat;
 };
 

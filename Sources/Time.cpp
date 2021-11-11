@@ -60,6 +60,10 @@ void Time::setFullTime(int newHours, int newMinutes, int newSeconds) {
     }
 }
 
+void Time::setTimeFormat(TimeFormat timeFormat) {
+    Time::timeFormat = timeFormat;
+}
+
 int Time::getSeconds() const {
     return seconds;
 }
@@ -100,6 +104,8 @@ std::string Time::formattedIntToString(int data) {
     std::string dataFormatted = std::string(2 - dataToString.length(), '0') + dataToString;
     return dataFormatted;
 }
+
+
 
 
 

@@ -147,7 +147,7 @@ void Date::setFullDate(int newDay, int newMonth, int newYear) {
         setMonth(newMonth);
         setDay(newDay);
     } catch (const std::invalid_argument &e) {
-        std::cout << e.what();
+        std::cerr << e.what() << std::endl;
         Date::day = currentDay;
         Date::month = currentMonth;
         Date::year = currentYear;

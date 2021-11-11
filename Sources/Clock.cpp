@@ -17,7 +17,7 @@ Clock::~Clock() {
 }
 
 void Clock::printFullDate() {
-    std::cout << date->getFullDate() << std::endl;
+    std::cout << date->getDayOfWeek() << ", " << date->getFullDate() << std::endl;
 }
 
 void Clock::printFullTime() {
@@ -65,4 +65,14 @@ void Clock::increaseOneDay() {
         }
     }
 }
+
+void Clock::setDateFromat(DateFormat dateFormat) {
+    date->setDateFormat(dateFormat);
+}
+
+void Clock::setTimeFormat(TimeFormat timeFormat) {
+    time->setTimeFormat(timeFormat);
+}
+
+
 

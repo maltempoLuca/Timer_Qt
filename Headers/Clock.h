@@ -24,6 +24,10 @@ public:
 
     void printFullTime();
 
+    void setDateFromat(DateFormat dateFormat);
+
+    void setTimeFormat(TimeFormat timeFormat);
+
 private slots:
 
     void increaseOneSecond();
