@@ -24,7 +24,7 @@ void Time::setSeconds(int newSeconds) {
     if (newSeconds >= 0 && newSeconds < 60) {
         Time::seconds = newSeconds;
     } else {
-        throw std::invalid_argument("Invalid newSeconds");
+        throw std::invalid_argument("Invalid seconds");
     };
 }
 
@@ -32,15 +32,15 @@ void Time::setMinutes(int newMinutes) {
     if (newMinutes >= 0 && newMinutes < 60) {
         Time::minutes = newMinutes;
     } else {
-        throw std::invalid_argument("Invalid newMinutes");
+        throw std::invalid_argument("Invalid minutes");
     }
 }
 
-void Time::setHours(int newHours) {
-    if (newHours >= 0 && newHours < 24) {
-        Time::hours = newHours;
+void Time::setHours(int newHour) {
+    if (newHour >= 0 && newHour < 24) {
+        Time::hours = newHour;
     } else {
-        throw std::invalid_argument("Invalid newHours");
+        throw std::invalid_argument("Invalid hours");
     }
 }
 
@@ -53,14 +53,14 @@ void Time::setFullTime(int newHours, int newMinutes, int newSeconds) {
         setMinutes(newMinutes);
         setHours(newHours);
     } catch (const std::invalid_argument &e) {
-        std::cerr << e.what() << std::endl;
+        //std::cerr << e.what() << std::endl;
         Time::seconds = currentSeconds;
         Time::minutes = currentMinutes;
         Time::hours = currentHours;
     }
 }
 
-void Time::setTimeFormat(TimeFormat timeFormat) {
+void Time::setTimeFormat(const TimeFormat &timeFormat) {
     Time::timeFormat = timeFormat;
 }
 
@@ -103,6 +103,10 @@ std::string Time::formattedIntToString(int data) {
     std::string dataToString = std::to_string(data);
     std::string dataFormatted = std::string(2 - dataToString.length(), '0') + dataToString;
     return dataFormatted;
+}
+
+TimeFormat Time::getTimeFormat() const {
+    return timeFormat;
 }
 
 

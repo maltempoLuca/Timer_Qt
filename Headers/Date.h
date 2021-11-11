@@ -32,7 +32,7 @@ public:
 
     void setFullDate(int newDay, int newMonth, int newYear);
 
-    void setDateFormat(DateFormat dateFormat);
+    void setDateFormat(const DateFormat &dateFormat);
 
     std::string getFullDate() const;
 

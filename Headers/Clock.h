@@ -18,28 +18,35 @@ Q_OBJECT
 public:
     Clock();
 
-    void printFullDate();
-
     virtual ~Clock();
+
+    void printFullDate();
 
     void printFullTime();
 
-    void setDateFromat(DateFormat dateFormat);
+    void setDateFormat(const DateFormat &dateFormat);
 
-    void setTimeFormat(TimeFormat timeFormat);
+    void setTimeFormat(const TimeFormat &timeFormat);
+
+    void setTime(int hours, int minutes, int second);
+
+    void setDate(int day, int month, int year);
+
+    std::string getDate();
+
+    std::string getTime();
 
 private slots:
 
     void increaseOneSecond();
 
 private:
+    void increaseOneDay();
+
     const std::unique_ptr<Date> date;
     const std::unique_ptr<Time> time;
     QTimer *qTimer;
     static const int OneSecondInMilliSecond;
-
-    void increaseOneDay();
-
 
 };
 

@@ -38,7 +38,9 @@ public:
 
     std::string getFullTime();
 
-    void setTimeFormat(TimeFormat timeFormat);
+    void setTimeFormat(const TimeFormat &timeFormat);
+
+    TimeFormat getTimeFormat() const;
 
 private:
 

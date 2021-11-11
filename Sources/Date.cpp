@@ -147,7 +147,7 @@ void Date::setFullDate(int newDay, int newMonth, int newYear) {
         setMonth(newMonth);
         setDay(newDay);
     } catch (const std::invalid_argument &e) {
-        std::cerr << e.what() << std::endl;
+        //std::cerr << e.what() << std::endl;
         Date::day = currentDay;
         Date::month = currentMonth;
         Date::year = currentYear;
@@ -157,25 +157,28 @@ void Date::setFullDate(int newDay, int newMonth, int newYear) {
     }
 }
 
-void Date::setDateFormat(DateFormat dateFormat) {
+void Date::setDateFormat(const DateFormat &dateFormat) {
     Date::dateFormat = dateFormat;
 }
 
 //TODO: capisci come ritornare stringhe.
 std::string Date::getFullDate() const {
     std::string fullDate;
+    std::string currentDay = std::string(2 - std::to_string(day).length(), '0') + std::to_string(day);
+    std::string currentMonth = std::string(2 - std::to_string(month).length(), '0') + std::to_string(month);
+    std::string currentYear = std::to_string(year);
     switch (dateFormat) {
         case DMY :
-            fullDate = std::to_string(day) + "/" + std::to_string(month) + "/" + std::to_string(year);
+            fullDate = currentDay + "/" + currentMonth + "/" + currentYear;
             break;
         case MDY :
-            fullDate = std::to_string(month) + "/" + std::to_string(day) + "/" + std::to_string(year);
+            fullDate = currentMonth + "/" + currentDay + "/" + currentYear;
             break;
         case YMD:
-            fullDate = std::to_string(year) + "/" + std::to_string(month) + "/" + std::to_string(day);
+            fullDate = currentYear + "/" + currentMonth + "/" + currentDay;
             break;
         case ReducedFormat:
-            fullDate = std::to_string(day) + "/" + std::to_string(month);
+            fullDate = currentDay + "/" + currentMonth;
             break;
     }
     return fullDate;
@@ -184,7 +187,6 @@ std::string Date::getFullDate() const {
 int Date::getDay() const {
     return day;
 }
-
 
 int Date::getDayOfWeek() const {
     return dayOfWeek;
