@@ -42,12 +42,20 @@ TEST(DateTest, InsertingInvalidFullDate) {
 }
 
 TEST(DateTest, isLeapYearTest) {
-    Date date;
-    date.setFullDate(1, 1, 2016);
-    ASSERT_TRUE(date.getIsLeapYear());
-    date.setFullDate(1, 1, 2018);
-    ASSERT_FALSE(date.getIsLeapYear());
+    Date date0 = Date(1, 1, 2016);
+    Date date1 = Date(1, 1, 2018);
+    ASSERT_TRUE(date0.isLeapYear());
+    ASSERT_FALSE(date1.isLeapYear());
 }
+
+TEST(DateTest, isLastDayOfMonthTest) {
+    Date date;
+    date.setFullDate(31, 1, 2016);
+    ASSERT_TRUE(date.isLastDayOfMonth());
+    date.setFullDate(30, 1, 2016);
+    ASSERT_FALSE(date.isLastDayOfMonth());
+}
+
 
 TEST(DateTest, DateFormatTest) {
     Date date;

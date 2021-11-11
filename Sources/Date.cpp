@@ -123,13 +123,13 @@ void Date::verifyLeapYear(int year) {
     if (year % 4 == 0) {
         if (year % 100 == 0) {
             if (year % 400 == 0)
-                setIsLeapYear(true);
+                leapYear = true;
             else
-                setIsLeapYear(false);
+                leapYear = false;
         } else
-            setIsLeapYear(true);
+            leapYear = true;
     } else
-        setIsLeapYear(false);
+        leapYear = false;
 }
 
 void Date::setFullDate(int newDay, int newMonth, int newYear) {
@@ -163,20 +163,22 @@ void Date::setDateFormat(DateFormat dateFormat) {
 
 //TODO: capisci come ritornare stringhe.
 std::string Date::getFullDate() const {
+    std::string fullDate;
     switch (dateFormat) {
         case DMY :
-            return std::to_string(day) + "/" + std::to_string(month) + "/" + std::to_string(year);
+            fullDate = std::to_string(day) + "/" + std::to_string(month) + "/" + std::to_string(year);
             break;
         case MDY :
-            return std::to_string(month) + "/" + std::to_string(day) + "/" + std::to_string(year);
+            fullDate = std::to_string(month) + "/" + std::to_string(day) + "/" + std::to_string(year);
             break;
         case YMD:
-            return std::to_string(year) + "/" + std::to_string(month) + "/" + std::to_string(day);
+            fullDate = std::to_string(year) + "/" + std::to_string(month) + "/" + std::to_string(day);
             break;
         case ReducedFormat:
-            return std::to_string(day) + "/" + std::to_string(month);
+            fullDate = std::to_string(day) + "/" + std::to_string(month);
             break;
     }
+    return fullDate;
 }
 
 int Date::getDay() const {
@@ -198,12 +200,7 @@ int Date::getYear() const {
     return year;
 }
 
-
-void Date::setIsLeapYear(bool isLeapYear) {
-    Date::leapYear = isLeapYear;
-}
-
-bool Date::getIsLeapYear() const {
+bool Date::isLeapYear() const {
     return leapYear;
 }
 

@@ -46,13 +46,11 @@ public:
 
     bool isLastDayOfMonth() const;
 
-    bool getIsLeapYear() const;
+    bool isLeapYear() const;
 
     int getYear() const;
 
 private:
-
-    void setIsLeapYear(bool isLeapYear);
 
     void verifyLeapYear(int year);
 

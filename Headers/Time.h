@@ -5,6 +5,9 @@
 #ifndef TIMER_QT_TIME_H
 #define TIMER_QT_TIME_H
 
+#include <iostream>
+#include <iomanip>
+
 enum TimeFormat {
     Format12h, Format24h
 };
@@ -13,26 +16,36 @@ class Time {
 public:
     Time();
 
+    Time(int hours, int minutes, int seconds);
+
     void initializeTime();
 
 public:
 
-    int getSeconds() const;
+    void setSeconds(int newSeconds);
 
-    void setSeconds(int seconds);
+    void setMinutes(int newMinutes);
+
+    void setHours(int newHours);
+
+    void setFullTime(int newHours, int newMinutes, int newSeconds);
+
+    int getSeconds() const;
 
     int getMinutes() const;
 
-    void setMinutes(int minutes);
-
     int getHours() const;
 
-    void setHours(int hours);
+    std::string getFullTime();
+
 
 private:
-    int seconds, minutes, hours;
-    TimeFormat timeFormat;
 
+    std::string formattedIntToString(int data);
+
+    int seconds, minutes, hours;
+    std::string pippo;
+    TimeFormat timeFormat;
 };
 
 

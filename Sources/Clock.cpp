@@ -17,36 +17,39 @@ Clock::~Clock() {
 }
 
 void Clock::printFullDate() {
-    std::cout << "Date: " << date->gatDayOfWeekAsString() << " " << date->getDay() << "/"
-              << date->getMonth()
-              << "/" << date->getYear() << std::endl;
+    std::cout << date->getFullDate() << std::endl;
 }
 
 void Clock::printFullTime() {
-    std::cout << "Time: " << std::setfill('0') << std::setw(2) << time->getHours() << ":" << std::setfill('0')
-              << std::setw(2) << time->getMinutes() << ":" << std::setfill('0') << std::setw(2) << time->getSeconds()
-              << std::endl;
+    std::cout << time->getFullTime() << std::endl;
+
 }
 
 void Clock::increaseOneSecond() {
-    if (time->getSeconds() < 59) {
-        time->setSeconds(time->getSeconds() + 1);
-    } else {
-        time->setSeconds(0);
-        if (time->getMinutes() < 59) {
-            time->setMinutes(time->getMinutes() + 1);
+    try {
+        if (time->getSeconds() < 59) {
+            time->setSeconds(time->getSeconds() + 1);
         } else {
-            time->setMinutes(0);
-            if (time->getHours() < 23) {
-                time->setHours(time->getHours() + 1);
+            time->setSeconds(0);
+            if (time->getMinutes() < 59) {
+                time->setMinutes(time->getMinutes() + 1);
             } else {
-                time->setHours(0);
-                increaseOneDay();
+                time->setMinutes(0);
+                if (time->getHours() < 23) {
+                    time->setHours(time->getHours() + 1);
+                } else {
+                    time->setHours(0);
+                    increaseOneDay();
+                }
             }
         }
+        printFullTime();
+        printFullDate();
     }
-    printFullTime();
-    printFullDate();
+    catch (const std::exception &e) {
+        std::cerr << e.what() << std::endl;
+        //TODO: chiamare una nuova inizializzazione dell'orologio?
+    }
 }
 
 void Clock::increaseOneDay() {
