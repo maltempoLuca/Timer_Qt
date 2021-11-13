@@ -17,7 +17,7 @@ class Timer : public QMainWindow, public Observer {
 Q_OBJECT
 
 public:
-    Timer(QWidget *parent = nullptr);
+    Timer(QWidget *parent, Clock *clock);
 
     ~Timer() override;
 
@@ -51,6 +51,10 @@ private:
     void startTimer(const QString &hours, const QString &minutes, const QString &seconds);
 
     void dontStartTimer();
+
+    void setDateFormat();
+
+    void setTimeFormat();
 
 
 private:

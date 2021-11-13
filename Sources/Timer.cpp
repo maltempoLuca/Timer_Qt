@@ -8,8 +8,8 @@
 #include "../Headers/Timer.h"
 #include "../Formats/ui_Timer.h"
 
-Timer::Timer(QWidget *parent)
-        : QMainWindow(parent), ui(new Ui::Timer), clock(new Clock), isTimerSet(false), isTimerActive(false),
+Timer::Timer(QWidget *parent, Clock *clock)
+        : QMainWindow(parent), ui(new Ui::Timer), clock(clock), isTimerSet(false), isTimerActive(false),
           dateFormat(DMY), timeFormat(Format24h) {
     ui->setupUi(this);
     clock->registerObserver(this);
@@ -19,8 +19,8 @@ Timer::Timer(QWidget *parent)
 }
 
 Timer::~Timer() {
+    clock->removeObserver(this);
     delete ui;
-    delete clock;
 }
 
 void Timer::initializeFormatMenu() {
@@ -139,14 +139,18 @@ void Timer::on_resetButton_clicked() {
 
 
 void Timer::update() {
-    std::string currentDate = clock->getDate();
+    setDateFormat();
+    setTimeFormat();
+    std::string currentDate = clock->getDate(dateFormat);
+    std::string currentTime = clock->getTime(timeFormat);
+
+
     // data
     ui->day->setText(QString::fromStdString(currentDate.substr(0, 2)));
     ui->month->setText(QString::fromStdString(currentDate.substr(3, 2)));
     ui->year->setText(QString::fromStdString(currentDate.substr(6)));
     ui->dayOfWeek->setText(QString::fromStdString(clock->getDayOfWeek()));
 
-    std::string currentTime = clock->getTime();
     // orologio
     ui->clockTimeLabel->display(QString::fromStdString(currentTime));
 
@@ -154,6 +158,25 @@ void Timer::update() {
     if (isTimerActive) {
         ui->secondsTimer->display(ui->secondsTimer->value() - 1);
     }
+}
 
+void Timer::setDateFormat() {
+    std::string currentFormat = ui->dateFormat->currentText().toStdString();
+    if (currentFormat == "DMY") {
+        dateFormat = DMY;
+    } else if (currentFormat == "MDY") {
+        dateFormat = MDY;
+    } else {
+        dateFormat = YMD;
+    }
+}
+
+void Timer::setTimeFormat() {
+    std::string currentFormat = ui->timeFormat->currentText().toStdString();
+    if (currentFormat == "24h format")
+        timeFormat = Format24h;
+    else {
+        timeFormat = Format12h;
+    }
 }
 

@@ -5,7 +5,7 @@
 #include <QTime>
 #include "../Headers/Time.h"
 
-Time::Time() : seconds(0), minutes(0), hours(0), timeFormat(Format24h) {
+Time::Time() : seconds(0), minutes(0), hours(0) {
     initializeTime();
 }
 
@@ -60,10 +60,6 @@ void Time::setFullTime(int newHours, int newMinutes, int newSeconds) {
     }
 }
 
-void Time::setTimeFormat(const TimeFormat &timeFormat) {
-    Time::timeFormat = timeFormat;
-}
-
 int Time::getSeconds() const {
     return seconds;
 }
@@ -76,7 +72,7 @@ int Time::getHours() const {
     return hours;
 }
 
-std::string Time::getFullTime() {
+std::string Time::getFullTime(const TimeFormat &timeFormat) {
     std::string formattedHours;
     std::string formattedMinutes = formattedIntToString(minutes);
     std::string formattedSeconds = formattedIntToString(seconds);
@@ -87,10 +83,10 @@ std::string Time::getFullTime() {
         case Format12h :
             if (hours < 13) {
                 formattedHours = formattedIntToString(hours);
-                formattedSeconds = formattedSeconds + " AM";
+                formattedSeconds = formattedSeconds;//+ " AM"
             } else {
                 formattedHours = formattedIntToString(hours - 12);
-                formattedSeconds = formattedSeconds + " PM";
+                formattedSeconds = formattedSeconds;//+ " PM"
             }
             break;
     }
@@ -103,10 +99,6 @@ std::string Time::formattedIntToString(int data) {
     std::string dataToString = std::to_string(data);
     std::string dataFormatted = std::string(2 - dataToString.length(), '0') + dataToString;
     return dataFormatted;
-}
-
-TimeFormat Time::getTimeFormat() const {
-    return timeFormat;
 }
 
 

@@ -36,18 +36,13 @@ public:
 
     int getHours() const;
 
-    std::string getFullTime();
-
-    void setTimeFormat(const TimeFormat &timeFormat);
-
-    TimeFormat getTimeFormat() const;
+    std::string getFullTime(const TimeFormat &timeFormat);
 
 private:
 
     std::string formattedIntToString(int data);
 
     int seconds, minutes, hours;
-    TimeFormat timeFormat;
 };
 
 

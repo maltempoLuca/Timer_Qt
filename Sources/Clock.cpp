@@ -16,12 +16,12 @@ Clock::~Clock() {
     // qTimer's parent is clock, a QObject, you don't have to manually delete qTimer. Read QT Memory Management.
 }
 
-void Clock::printFullDate() {
-    std::cout << date->gatDayOfWeekAsString() << ", " << date->getFullDate() << std::endl;
+void Clock::printFullDate(const DateFormat &dateFormat) {
+    std::cout << date->getDayOfWeekAsString() << ", " << date->getFullDate(dateFormat) << std::endl;
 }
 
-void Clock::printFullTime() {
-    std::cout << time->getFullTime() << std::endl;
+void Clock::printFullTime(const TimeFormat &timeformat) {
+    std::cout << time->getFullTime(timeformat) << std::endl;
 
 }
 
@@ -67,14 +67,6 @@ void Clock::increaseOneDay() {
     }
 }
 
-void Clock::setDateFormat(const DateFormat &dateFormat) {
-    date->setDateFormat(dateFormat);
-}
-
-void Clock::setTimeFormat(const TimeFormat &timeFormat) {
-    time->setTimeFormat(timeFormat);
-}
-
 void Clock::setTime(int hours, int minutes, int second) {
     time->setFullTime(hours, minutes, second);
 }
@@ -83,13 +75,13 @@ void Clock::setDate(int day, int month, int year) {
     date->setFullDate(day, month, year);
 }
 
-std::string Clock::getDate() {
-    std::string currentDate = date->getFullDate();
+std::string Clock::getDate(const DateFormat &dateFormat) {
+    std::string currentDate = date->getFullDate(dateFormat);
     return currentDate;
 }
 
-std::string Clock::getTime() {
-    std::string currentTime = time->getFullTime();
+std::string Clock::getTime(const TimeFormat &timeFormat) {
+    std::string currentTime = time->getFullTime(timeFormat);
     return currentTime;
 }
 
@@ -108,7 +100,7 @@ void Clock::notify() const {
 }
 
 std::string Clock::getDayOfWeek() {
-    return date->gatDayOfWeekAsString();
+    return date->getDayOfWeekAsString();
 }
 
 

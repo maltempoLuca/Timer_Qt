@@ -8,7 +8,9 @@ using namespace std;
 
 int main(int argc, char *argv[]) {
     QApplication a(argc, argv);
-    Timer t;
+    Clock clock;
+    Timer t(nullptr, &clock);
     t.show();
     return a.exec();
 }
+

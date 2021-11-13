@@ -5,7 +5,7 @@
 #include <QDate>
 #include "../Headers/Date.h"
 
-Date::Date() : day(1), dayOfWeek(4), month(1), year(1970), leapYear(false), lastDayOfMonth(false), dateFormat(DMY),
+Date::Date() : day(1), dayOfWeek(4), month(1), year(1970), leapYear(false), lastDayOfMonth(false),
                daysOfWeek({"Sunday", "Monday", "Tuesday", "Wednesday",
                            "Thursday", "Friday", "Saturday"}) {
     initializeDate();
@@ -157,12 +157,9 @@ void Date::setFullDate(int newDay, int newMonth, int newYear) {
     }
 }
 
-void Date::setDateFormat(const DateFormat &dateFormat) {
-    Date::dateFormat = dateFormat;
-}
 
 //TODO: capisci come ritornare stringhe.
-std::string Date::getFullDate() const {
+std::string Date::getFullDate(const DateFormat &dateFormat) const {
     std::string fullDate;
     std::string currentDay = std::string(2 - std::to_string(day).length(), '0') + std::to_string(day);
     std::string currentMonth = std::string(2 - std::to_string(month).length(), '0') + std::to_string(month);
@@ -188,11 +185,6 @@ int Date::getDay() const {
     return day;
 }
 
-int Date::getDayOfWeek() const {
-    return dayOfWeek;
-}
-
-
 int Date::getMonth() const {
     return month;
 }
@@ -210,7 +202,7 @@ bool Date::isLastDayOfMonth() const {
     return lastDayOfMonth;
 }
 
-const std::string &Date::gatDayOfWeekAsString() const {
+const std::string &Date::getDayOfWeekAsString() const {
     return daysOfWeek[dayOfWeek];
 }
 

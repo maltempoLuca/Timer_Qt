@@ -23,13 +23,9 @@ public:
 
     virtual ~Clock();
 
-    void printFullDate();
+    void printFullDate(const DateFormat &dateFormat);
 
-    void printFullTime();
-
-    void setDateFormat(const DateFormat &dateFormat);
-
-    void setTimeFormat(const TimeFormat &timeFormat);
+    void printFullTime(const TimeFormat &timeFormat);
 
     void setTime(int hours, int minutes, int second);
 
@@ -43,9 +39,9 @@ public:
 
     std::string getDayOfWeek();
 
-    std::string getDate();
+    std::string getDate(const DateFormat &dateFormat);
 
-    std::string getTime();
+    std::string getTime(const TimeFormat &timeFormat);
 
 
 private slots:

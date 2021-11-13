@@ -32,15 +32,11 @@ public:
 
     void setFullDate(int newDay, int newMonth, int newYear);
 
-    void setDateFormat(const DateFormat &dateFormat);
-
-    std::string getFullDate() const;
+    std::string getFullDate(const DateFormat &dateFormat) const;
 
     int getDay() const;
 
-    int getDayOfWeek() const;
-
-    const std::string &gatDayOfWeekAsString() const;
+    const std::string &getDayOfWeekAsString() const;
 
     int getMonth() const;
 
@@ -66,7 +62,6 @@ private:
     int day, dayOfWeek, month, year;
     bool leapYear;
     bool lastDayOfMonth;
-    DateFormat dateFormat;
     const std::vector<std::string> daysOfWeek;
 };
 
