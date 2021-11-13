@@ -7,6 +7,7 @@
 #include "../Headers/mainwindow.h"
 #include "../Formats/ui_mainwindow.h"
 #include <QDebug>
+#include <QDateTime>
 
 
 mainWindow::mainWindow(QWidget *parent)
@@ -19,9 +20,7 @@ mainWindow::mainWindow(QWidget *parent)
 mainWindow::~mainWindow() {
     delete ui;
     delete clock;
-
 }
-
 
 void mainWindow::update() {
     std::string currentDate = clock->getDate();

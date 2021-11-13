@@ -24,9 +24,6 @@ public:
 
     void update() override;
 
-public slots:
-
-    void myfunction();
 
 private:
     Ui::mainWindow *ui;

@@ -18,7 +18,8 @@ set(CMAKE_AUTOUIC ON)
 
 set(SOURCE_FILES
         Sources/Date.cpp Headers/Date.h Sources/Clock.cpp Headers/Clock.h
-        Sources/mainwindow.cpp Headers/mainwindow.h Sources/Time.cpp Headers/Time.h Headers/Subject.h Headers/Observer.h)
+        Sources/mainwindow.cpp Headers/mainwindow.h Sources/Time.cpp Headers/Time.h Headers/Subject.h Headers/Observer.h
+        Sources/Timer.cpp Headers/Timer.h Formats/Timer.ui)
 
 add_executable(Timer_Qt Sources/main.cpp)
 add_library(core ${SOURCE_FILES})
