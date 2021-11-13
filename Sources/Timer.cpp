@@ -9,13 +9,21 @@
 #include "../Formats/ui_Timer.h"
 
 Timer::Timer(QWidget *parent)
-        : QMainWindow(parent), ui(new Ui::Timer) {
+        : QMainWindow(parent), ui(new Ui::Timer), clock(new Clock), isTimerSet(false), isTimerActive(false),
+          dateFormat(DMY), timeFormat(Format24h) {
     ui->setupUi(this);
-    isTimerSet = false;
-    isTimerActive = false;
-    clock = new Clock;
     clock->registerObserver(this);
-    // formati:
+
+    initializeFormatMenu();
+    initializeTimer();
+}
+
+Timer::~Timer() {
+    delete ui;
+    delete clock;
+}
+
+void Timer::initializeFormatMenu() {
     ui->dateFormat->addItem(QString("DMY"));
     ui->dateFormat->addItem(QString("MDY"));
     ui->dateFormat->addItem(QString("YMD"));
@@ -24,9 +32,17 @@ Timer::Timer(QWidget *parent)
     ui->timeFormat->addItem(QString("12h format"));
 }
 
-Timer::~Timer() {
-    delete ui;
-    delete clock;
+void Timer::initializeTimer() {
+    ui->hourTimerInput->setText("00");
+    ui->hourTimerInput->setEnabled(true);
+    ui->minuteTimerInput->setText("00");
+    ui->minuteTimerInput->setEnabled(true);
+    ui->secondTimerInput->setText("00");
+    ui->secondTimerInput->setEnabled(true);
+
+    ui->hoursTimer->display(00);
+    ui->minutesTimer->display(00);
+    ui->secondsTimer->display(00);
 }
 
 void Timer::on_hourTimerInput_returnPressed() {
@@ -40,7 +56,6 @@ void Timer::on_hourTimerInput_returnPressed() {
     }
 }
 
-
 void Timer::on_minuteTimerInput_returnPressed() {
     if (ui->minuteTimerInput->text().toInt() < 0 || ui->minuteTimerInput->text().toInt() > 59) {
         QMessageBox::StandardButton error = QMessageBox::warning(this, "Invalid input",
@@ -50,7 +65,6 @@ void Timer::on_minuteTimerInput_returnPressed() {
         ui->minuteTimerInput->setEnabled(false);
     }
 }
-
 
 void Timer::on_secondTimerInput_returnPressed() {
     if (ui->secondTimerInput->text().toInt() < 0 || ui->secondTimerInput->text().toInt() > 59) {
@@ -62,58 +76,64 @@ void Timer::on_secondTimerInput_returnPressed() {
     }
 }
 
-
 void Timer::on_hourTimerInput_selectionChanged() {
     ui->hourTimerInput->setText("");
 }
 
+void Timer::on_minuteTimerInput_selectionChanged() {
+    ui->minuteTimerInput->setText("");
+}
+
+void Timer::on_secondTimerInput_selectionChanged() {
+    ui->secondTimerInput->setText("");
+}
+
 void Timer::on_startButton_clicked() {
     if (!isTimerSet) {
-        if (!isTimerActive) {
-            int hours = ui->hourTimerInput->text().toInt();
-            int minutes = ui->minuteTimerInput->text().toInt();
-            int seconds = ui->secondTimerInput->text().toInt();
-            if (seconds > 0) {
-                ui->hoursTimer->display(hours);
-                ui->minutesTimer->display(minutes);
-                ui->secondsTimer->display(seconds);
-                isTimerSet = true;
-                isTimerActive = true;
+        QString hours = ui->hourTimerInput->text();
+        QString minutes = ui->minuteTimerInput->text();
+        QString seconds = ui->secondTimerInput->text();
+        if (!(hours == "" && minutes == "" && seconds == "")) {
+            if (seconds.toInt() > 0) {
+                startTimer(hours, minutes, seconds);
             } else {
-                if (hours > 0 || minutes > 0) {
-                    on_resetButton_clicked();
-                    QMessageBox::StandardButton error = QMessageBox::warning(this, "Ivalid Time",
-                                                                             "Please set a valid input for the timer.");
+                if (hours.toInt() > 0 || minutes.toInt() > 0) {
+                    startTimer(hours, minutes, seconds);
+                } else {
+                    dontStartTimer();
                 }
             }
+        } else {
+            dontStartTimer();
         }
     } else {
         isTimerActive = true;
     }
+}
 
+void Timer::startTimer(const QString &hours, const QString &minutes, const QString &seconds) {
+    ui->hoursTimer->display(hours.toInt());
+    ui->minutesTimer->display(minutes.toInt());
+    ui->secondsTimer->display(seconds.toInt());
+    isTimerSet = true;
+    isTimerActive = true;
+}
+
+void Timer::dontStartTimer() {
+    on_resetButton_clicked();
+    QMessageBox::StandardButton error = QMessageBox::warning(this, "Ivalid Time",
+                                                             "Please set a valid input for the timer.");
 }
 
 void Timer::on_stopButton_clicked() {
     isTimerActive = false;
 }
 
-
 void Timer::on_resetButton_clicked() {
-    if (isTimerSet) {
-        if (!isTimerActive) {
-            isTimerActive = false;
-            isTimerSet = false;
-            ui->hourTimerInput->setText("00");
-            ui->hourTimerInput->setEnabled(true);
-            ui->minuteTimerInput->setText("00");
-            ui->secondTimerInput->setEnabled(true);
-            ui->secondTimerInput->setText("00");
-            ui->secondTimerInput->setEnabled(true);
-
-            ui->hoursTimer->display(00);
-            ui->minutesTimer->display(00);
-            ui->secondsTimer->display(00);
-        }
+    if (!isTimerActive) {
+        isTimerActive = false;
+        isTimerSet = false;
+        initializeTimer();
     }
 }
 
@@ -136,3 +156,4 @@ void Timer::update() {
     }
 
 }
+

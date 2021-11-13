@@ -35,15 +35,31 @@ private slots:
 
     void on_hourTimerInput_selectionChanged();
 
+    void on_minuteTimerInput_selectionChanged();
+
+    void on_secondTimerInput_selectionChanged();
+
     void on_stopButton_clicked();
 
     void on_resetButton_clicked();
+
+private:
+    void initializeTimer();
+
+    void initializeFormatMenu();
+
+    void startTimer(const QString &hours, const QString &minutes, const QString &seconds);
+
+    void dontStartTimer();
+
 
 private:
     Ui::Timer *ui;
     Clock *clock;
     bool isTimerSet;
     bool isTimerActive;
+    DateFormat dateFormat;
+    TimeFormat timeFormat;
 };
 
 
