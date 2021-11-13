@@ -17,55 +17,22 @@
             <widget class="QWidget" name="verticalLayoutWidget">
                 <property name="geometry">
                     <rect>
-                        <x>219</x>
+                        <x>409</x>
                         <y>9</y>
-                        <width>391</width>
+                        <width>201</width>
                         <height>76</height>
                     </rect>
                 </property>
                 <layout class="QHBoxLayout" name="dayMonthYear_label">
                     <item>
-                        <widget class="QLabel" name="day">
+                        <widget class="QLabel" name="dayMonthYear">
                             <property name="font">
                                 <font>
-                                    <pointsize>30</pointsize>
+                                    <pointsize>33</pointsize>
                                 </font>
                             </property>
                             <property name="text">
-                                <string>2000</string>
-                            </property>
-                            <property name="alignment">
-                                <set>Qt::AlignCenter</set>
-                            </property>
-                        </widget>
-                    </item>
-                    <item>
-                        <widget class="QLabel" name="month">
-                            <property name="font">
-                                <font>
-                                    <pointsize>30</pointsize>
-                                </font>
-                            </property>
-                            <property name="text">
-                                <string>2000</string>
-                            </property>
-                            <property name="alignment">
-                                <set>Qt::AlignCenter</set>
-                            </property>
-                        </widget>
-                    </item>
-                    <item>
-                        <widget class="QLabel" name="year">
-                            <property name="font">
-                                <font>
-                                    <pointsize>30</pointsize>
-                                </font>
-                            </property>
-                            <property name="text">
-                                <string>2000</string>
-                            </property>
-                            <property name="alignment">
-                                <set>Qt::AlignCenter</set>
+                                <string>TextLabel</string>
                             </property>
                         </widget>
                     </item>
@@ -109,16 +76,16 @@
                         <height>76</height>
                     </rect>
                 </property>
-                <layout class="QHBoxLayout" name="dayOfWeek_label">
+                <layout class="QHBoxLayout" name="date_layout">
                     <item>
-                        <widget class="QLabel" name="dayOfWeek">
+                        <widget class="QLabel" name="date_label">
                             <property name="font">
                                 <font>
                                     <pointsize>35</pointsize>
                                 </font>
                             </property>
                             <property name="text">
-                                <string>textLabel</string>
+                                <string>Date:</string>
                             </property>
                             <property name="alignment">
                                 <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -562,6 +529,30 @@
                             </property>
                             <property name="alignment">
                                 <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                            </property>
+                        </widget>
+                    </item>
+                </layout>
+            </widget>
+            <widget class="QWidget" name="verticalLayoutWidget_7">
+                <property name="geometry">
+                    <rect>
+                        <x>200</x>
+                        <y>10</y>
+                        <width>201</width>
+                        <height>76</height>
+                    </rect>
+                </property>
+                <layout class="QHBoxLayout" name="dayOfWeek_layot">
+                    <item>
+                        <widget class="QLabel" name="dayOfWeek">
+                            <property name="font">
+                                <font>
+                                    <pointsize>33</pointsize>
+                                </font>
+                            </property>
+                            <property name="text">
+                                <string>TextLabel</string>
                             </property>
                         </widget>
                     </item>

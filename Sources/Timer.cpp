@@ -30,6 +30,12 @@ void Timer::initializeFormatMenu() {
 
     ui->timeFormat->addItem(QString("24h format"));
     ui->timeFormat->addItem(QString("12h format"));
+
+    connect(ui->dateFormat, SIGNAL(currentIndexChanged(int)),
+            this, SLOT(setDateFormat()));
+
+    connect(ui->timeFormat, SIGNAL(currentIndexChanged(int)),
+            this, SLOT(setTimeFormat()));
 }
 
 void Timer::initializeTimer() {
@@ -139,16 +145,12 @@ void Timer::on_resetButton_clicked() {
 
 
 void Timer::update() {
-    setDateFormat();
-    setTimeFormat();
     std::string currentDate = clock->getDate(dateFormat);
     std::string currentTime = clock->getTime(timeFormat);
 
 
-    // data
-    ui->day->setText(QString::fromStdString(currentDate.substr(0, 2)));
-    ui->month->setText(QString::fromStdString(currentDate.substr(3, 2)));
-    ui->year->setText(QString::fromStdString(currentDate.substr(6)));
+//  data
+    ui->dayMonthYear->setText(QString::fromStdString(currentDate));
     ui->dayOfWeek->setText(QString::fromStdString(clock->getDayOfWeek()));
 
     // orologio
@@ -169,6 +171,9 @@ void Timer::setDateFormat() {
     } else {
         dateFormat = YMD;
     }
+
+    std::string currentDate = clock->getDate(dateFormat);
+    ui->dayMonthYear->setText(QString::fromStdString(currentDate));
 }
 
 void Timer::setTimeFormat() {
@@ -178,5 +183,16 @@ void Timer::setTimeFormat() {
     else {
         timeFormat = Format12h;
     }
+    std::string currentTime = clock->getTime(timeFormat);
+    ui->clockTimeLabel->display(QString::fromStdString(currentTime));
 }
+
+void Timer::on_dateFormat_currentIndexChanged(int index) {
+
+}
+
+void Timer::on_timeFormat_currentIndexChanged(int index) {
+
+}
+
 

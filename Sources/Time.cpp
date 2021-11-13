@@ -83,10 +83,10 @@ std::string Time::getFullTime(const TimeFormat &timeFormat) {
         case Format12h :
             if (hours < 13) {
                 formattedHours = formattedIntToString(hours);
-                formattedSeconds = formattedSeconds;//+ " AM"
+//                formattedSeconds = formattedSeconds + " AM";
             } else {
                 formattedHours = formattedIntToString(hours - 12);
-                formattedSeconds = formattedSeconds;//+ " PM"
+//                formattedSeconds = formattedSeconds + " PM";
             }
             break;
     }

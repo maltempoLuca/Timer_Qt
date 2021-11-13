@@ -43,6 +43,15 @@ private slots:
 
     void on_resetButton_clicked();
 
+    void setDateFormat();
+
+    void setTimeFormat();
+
+    void on_dateFormat_currentIndexChanged(int index);
+
+    void on_timeFormat_currentIndexChanged(int index);
+
+
 private:
     void initializeTimer();
 
@@ -51,11 +60,6 @@ private:
     void startTimer(const QString &hours, const QString &minutes, const QString &seconds);
 
     void dontStartTimer();
-
-    void setDateFormat();
-
-    void setTimeFormat();
-
 
 private:
     Ui::Timer *ui;
