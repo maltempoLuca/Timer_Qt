@@ -5,7 +5,7 @@
 #ifndef TIMER_QT_SUBJECT_H
 #define TIMER_QT_SUBJECT_H
 
-#include "Observer.h";
+#include "Observer.h"
 
 class Subject {
 

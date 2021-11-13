@@ -17,9 +17,9 @@
             <widget class="QWidget" name="verticalLayoutWidget">
                 <property name="geometry">
                     <rect>
-                        <x>249</x>
+                        <x>219</x>
                         <y>9</y>
-                        <width>371</width>
+                        <width>391</width>
                         <height>76</height>
                     </rect>
                 </property>
@@ -105,7 +105,7 @@
                     <rect>
                         <x>10</x>
                         <y>10</y>
-                        <width>231</width>
+                        <width>191</width>
                         <height>76</height>
                     </rect>
                 </property>
@@ -121,7 +121,7 @@
                                 <string>textLabel</string>
                             </property>
                             <property name="alignment">
-                                <set>Qt::AlignCenter</set>
+                                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
                             </property>
                         </widget>
                     </item>
@@ -130,46 +130,25 @@
             <widget class="QWidget" name="verticalLayoutWidget_4">
                 <property name="geometry">
                     <rect>
-                        <x>250</x>
+                        <x>220</x>
                         <y>90</y>
-                        <width>351</width>
+                        <width>381</width>
                         <height>76</height>
                     </rect>
                 </property>
                 <layout class="QHBoxLayout" name="clock_layout">
                     <item>
-                        <widget class="QLCDNumber" name="hours">
+                        <widget class="QLCDNumber" name="clockTimeLabel">
                             <property name="font">
                                 <font>
-                                    <pointsize>30</pointsize>
+                                    <pointsize>10</pointsize>
                                 </font>
                             </property>
                             <property name="layoutDirection">
-                                <enum>Qt::LeftToRight</enum>
+                                <enum>Qt::RightToLeft</enum>
                             </property>
-                        </widget>
-                    </item>
-                    <item>
-                        <widget class="QLCDNumber" name="minutes">
-                            <property name="font">
-                                <font>
-                                    <pointsize>30</pointsize>
-                                </font>
-                            </property>
-                            <property name="layoutDirection">
-                                <enum>Qt::LeftToRight</enum>
-                            </property>
-                        </widget>
-                    </item>
-                    <item>
-                        <widget class="QLCDNumber" name="seconds">
-                            <property name="font">
-                                <font>
-                                    <pointsize>30</pointsize>
-                                </font>
-                            </property>
-                            <property name="layoutDirection">
-                                <enum>Qt::LeftToRight</enum>
+                            <property name="digitCount">
+                                <number>8</number>
                             </property>
                         </widget>
                     </item>
@@ -200,7 +179,7 @@
                                 </widget>
                             </item>
                             <item>
-                                <widget class="QLCDNumber" name="minutes_2">
+                                <widget class="QLCDNumber" name="minutesTimer">
                                     <property name="font">
                                         <font>
                                             <pointsize>30</pointsize>
@@ -215,7 +194,7 @@
                                 </widget>
                             </item>
                             <item>
-                                <widget class="QLCDNumber" name="seconds_2">
+                                <widget class="QLCDNumber" name="secondsTimer">
                                     <property name="font">
                                         <font>
                                             <pointsize>30</pointsize>
@@ -246,21 +225,21 @@
                     <item>
                         <layout class="QHBoxLayout" name="horizontalLayout_2">
                             <item>
-                                <widget class="QPushButton" name="pushButton">
+                                <widget class="QPushButton" name="startButton">
                                     <property name="text">
                                         <string>Start Timer</string>
                                     </property>
                                 </widget>
                             </item>
                             <item>
-                                <widget class="QPushButton" name="pushButton_2">
+                                <widget class="QPushButton" name="stopButton">
                                     <property name="text">
                                         <string>Stop Timer</string>
                                     </property>
                                 </widget>
                             </item>
                             <item>
-                                <widget class="QPushButton" name="pushButton_3">
+                                <widget class="QPushButton" name="resetButton">
                                     <property name="text">
                                         <string>Reset Timer</string>
                                     </property>
@@ -370,7 +349,7 @@
             <widget class="QWidget" name="verticalLayoutWidget_9">
                 <property name="geometry">
                     <rect>
-                        <x>310</x>
+                        <x>220</x>
                         <y>180</y>
                         <width>101</width>
                         <height>81</height>
@@ -406,7 +385,7 @@
                     <rect>
                         <x>10</x>
                         <y>170</y>
-                        <width>291</width>
+                        <width>191</width>
                         <height>91</height>
                     </rect>
                 </property>
@@ -422,7 +401,7 @@
                                 <string>Set Timer :</string>
                             </property>
                             <property name="alignment">
-                                <set>Qt::AlignCenter</set>
+                                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
                             </property>
                         </widget>
                     </item>
@@ -431,7 +410,7 @@
             <widget class="QWidget" name="verticalLayoutWidget_11">
                 <property name="geometry">
                     <rect>
-                        <x>480</x>
+                        <x>390</x>
                         <y>180</y>
                         <width>101</width>
                         <height>81</height>
@@ -465,7 +444,7 @@
             <widget class="QWidget" name="verticalLayoutWidget_12">
                 <property name="geometry">
                     <rect>
-                        <x>650</x>
+                        <x>560</x>
                         <y>180</y>
                         <width>101</width>
                         <height>81</height>
@@ -499,7 +478,7 @@
             <widget class="QWidget" name="layoutWidget">
                 <property name="geometry">
                     <rect>
-                        <x>430</x>
+                        <x>340</x>
                         <y>180</y>
                         <width>31</width>
                         <height>81</height>
@@ -526,7 +505,7 @@
             <widget class="QWidget" name="layoutWidget">
                 <property name="geometry">
                     <rect>
-                        <x>600</x>
+                        <x>510</x>
                         <y>180</y>
                         <width>31</width>
                         <height>81</height>
@@ -550,6 +529,44 @@
                     </item>
                 </layout>
             </widget>
+            <widget class="QWidget" name="verticalLayoutWidget_13">
+                <property name="geometry">
+                    <rect>
+                        <x>720</x>
+                        <y>360</y>
+                        <width>101</width>
+                        <height>81</height>
+                    </rect>
+                </property>
+                <layout class="QVBoxLayout" name="insertTime_layout_4"/>
+            </widget>
+            <widget class="QWidget" name="horizontalLayoutWidget_2">
+                <property name="geometry">
+                    <rect>
+                        <x>10</x>
+                        <y>90</y>
+                        <width>191</width>
+                        <height>76</height>
+                    </rect>
+                </property>
+                <layout class="QHBoxLayout" name="Clock_Label_layout">
+                    <item>
+                        <widget class="QLabel" name="clock_layout_2">
+                            <property name="font">
+                                <font>
+                                    <pointsize>35</pointsize>
+                                </font>
+                            </property>
+                            <property name="text">
+                                <string>Time:</string>
+                            </property>
+                            <property name="alignment">
+                                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                            </property>
+                        </widget>
+                    </item>
+                </layout>
+            </widget>
         </widget>
         <widget class="QMenuBar" name="menubar">
             <property name="geometry">
@@ -557,7 +574,7 @@
                     <x>0</x>
                     <y>0</y>
                     <width>800</width>
-                    <height>24</height>
+                    <height>22</height>
                 </rect>
             </property>
         </widget>

@@ -107,4 +107,8 @@ void Clock::notify() const {
     }
 }
 
+std::string Clock::getDayOfWeek() {
+    return date->gatDayOfWeekAsString();
+}
+
 

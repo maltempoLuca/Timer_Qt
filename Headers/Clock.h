@@ -35,15 +35,18 @@ public:
 
     void setDate(int day, int month, int year);
 
+    void removeObserver(Observer *obs) override;
+
+    void registerObserver(Observer *obs) override;
+
+    void notify() const override;
+
+    std::string getDayOfWeek();
+
     std::string getDate();
 
     std::string getTime();
 
-    void notify() const override;
-
-    void removeObserver(Observer *obs) override;
-
-    void registerObserver(Observer *obs) override;
 
 private slots:
 

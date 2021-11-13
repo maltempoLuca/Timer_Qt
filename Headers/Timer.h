@@ -6,24 +6,26 @@
 #define TIMER_QT_TIMER_H
 
 #include <QMainWindow>
-
+#include "Observer.h"
+#include "Clock.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Timer; }
 QT_END_NAMESPACE
 
-class Timer : public QMainWindow {
+class Timer : public QMainWindow, public Observer {
 Q_OBJECT
 
 public:
     Timer(QWidget *parent = nullptr);
 
-    ~Timer();
+    ~Timer() override;
 
+    void update() override;
 
 private slots:
 
-    void on_pushButton_clicked();
+    void on_startButton_clicked();
 
     void on_hourTimerInput_returnPressed();
 
@@ -33,12 +35,15 @@ private slots:
 
     void on_hourTimerInput_selectionChanged();
 
-    void on_pushButton_2_clicked();
+    void on_stopButton_clicked();
 
-    void on_pushButton_3_clicked();
+    void on_resetButton_clicked();
 
 private:
     Ui::Timer *ui;
+    Clock *clock;
+    bool isTimerSet;
+    bool isTimerActive;
 };
 
 
