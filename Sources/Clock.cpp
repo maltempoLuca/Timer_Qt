@@ -14,6 +14,8 @@ Clock::Clock() : date(std::make_unique<Date>()), time(std::make_unique<Time>()) 
 
 Clock::~Clock() {
     // qTimer's parent is clock, a QObject, you don't have to manually delete qTimer. Read QT Memory Management.
+    for (Observer *obs: observerList)
+        observerList.remove(obs);
 }
 
 void Clock::printFullDate(const DateFormat &dateFormat) {

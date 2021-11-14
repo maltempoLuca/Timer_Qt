@@ -61,6 +61,11 @@ private:
 
     void dontStartTimer();
 
+    void decreaseTimer();
+
+    void resetTimer();
+
+
 private:
     Ui::Timer *ui;
     Clock *clock;

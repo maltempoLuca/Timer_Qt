@@ -137,9 +137,7 @@ void Timer::on_stopButton_clicked() {
 
 void Timer::on_resetButton_clicked() {
     if (!isTimerActive) {
-        isTimerActive = false;
-        isTimerSet = false;
-        initializeTimer();
+        resetTimer();
     }
 }
 
@@ -147,7 +145,6 @@ void Timer::on_resetButton_clicked() {
 void Timer::update() {
     std::string currentDate = clock->getDate(dateFormat);
     std::string currentTime = clock->getTime(timeFormat);
-
 
 //  data
     ui->dayMonthYear->setText(QString::fromStdString(currentDate));
@@ -158,8 +155,26 @@ void Timer::update() {
 
     //timer
     if (isTimerActive) {
-        ui->secondsTimer->display(ui->secondsTimer->value() - 1);
+        decreaseTimer();
     }
+}
+
+void Timer::decreaseTimer() {
+    if (ui->secondsTimer->intValue() > 0) {
+        ui->secondsTimer->display(ui->secondsTimer->value() - 1);
+    } else if (ui->minutesTimer->intValue() > 0) {
+        ui->minutesTimer->display(ui->minutesTimer->value() - 1);
+        ui->secondsTimer->display(59);
+    } else if (ui->hoursTimer->intValue() > 0) {
+        ui->hoursTimer->display(ui->hoursTimer->value() - 1);
+        ui->minutesTimer->display(59);
+        ui->secondsTimer->display(59);
+    } else {
+        resetTimer();
+//        QMessageBox::StandardButton timerExpired = QMessageBox::warning(this, "Timer finished",
+//                                                                        "Your time is up.");
+    }
+
 }
 
 void Timer::setDateFormat() {
@@ -193,6 +208,12 @@ void Timer::on_dateFormat_currentIndexChanged(int index) {
 
 void Timer::on_timeFormat_currentIndexChanged(int index) {
 
+}
+
+void Timer::resetTimer() {
+    isTimerActive = false;
+    isTimerSet = false;
+    initializeTimer();
 }
 
 
