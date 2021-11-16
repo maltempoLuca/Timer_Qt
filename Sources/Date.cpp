@@ -24,13 +24,12 @@ void Date::initializeDate() {
     setYear(qDate.year());
 }
 
-//TODO: capisci come gestire queste eccezioni lanciate.
-void Date::setDay(int day) {
-    if (isValidDay(day)) {
-        Date::day = day;
+void Date::setDay(int newDay) {
+    if (isValidDay(newDay)) {
+        Date::day = newDay;
         setDayOfWeekFromCurrentDate();
     } else {
-        throw std::invalid_argument("Invalid day");
+        throw std::invalid_argument("Invalid newDay");
     }
 }
 
@@ -68,12 +67,12 @@ void Date::setDayOfWeekFromCurrentDate() {
     dayOfWeek = (localYear + localYear / 4 - localYear / 100 + localYear / 400 + t[localMonth - 1] + localDay) % 7;
 }
 
-void Date::setMonth(int month) {
-    if (isValidMonth(month)) {
-        Date::month = month;
+void Date::setMonth(int newMonth) {
+    if (isValidMonth(newMonth)) {
+        Date::month = newMonth;
         setDayOfWeekFromCurrentDate();
     } else {
-        throw std::invalid_argument("Invalid month");
+        throw std::invalid_argument("Invalid newMonth");
     }
 }
 
@@ -93,13 +92,13 @@ bool Date::isValidMonth(int newMonth) {
     }
 }
 
-void Date::setYear(int year) {
-    if (isValidYear(year)) {
-        Date::year = year;
-        verifyLeapYear(year);
+void Date::setYear(int newYear) {
+    if (isValidYear(newYear)) {
+        Date::year = newYear;
+        verifyLeapYear(newYear);
         setDayOfWeekFromCurrentDate();
     } else {
-        throw std::invalid_argument("Invalid year");
+        throw std::invalid_argument("Invalid newYear");
     }
 }
 
@@ -119,10 +118,10 @@ bool Date::isValidYear(int newYear) {
     }
 }
 
-void Date::verifyLeapYear(int year) {
-    if (year % 4 == 0) {
-        if (year % 100 == 0) {
-            if (year % 400 == 0)
+void Date::verifyLeapYear(int newYear) {
+    if (newYear % 4 == 0) {
+        if (newYear % 100 == 0) {
+            if (newYear % 400 == 0)
                 leapYear = true;
             else
                 leapYear = false;
@@ -133,32 +132,13 @@ void Date::verifyLeapYear(int year) {
 }
 
 void Date::setFullDate(int newDay, int newMonth, int newYear) {
-    int currentDay = Date::day;
-    int currentMonth = Date::month;
-    int currentYear = Date::year;
-    int currentDayOfWeek = Date::dayOfWeek;
-    bool currentYearIsLeap = Date::leapYear;
-    bool currentDayIsLastOfMonth = Date::lastDayOfMonth;
-
-    try {
         setYear(newYear);
         Date::month = 1;
         Date::day = 1;
         setMonth(newMonth);
         setDay(newDay);
-    } catch (const std::invalid_argument &e) {
-        //std::cerr << e.what() << std::endl;
-        Date::day = currentDay;
-        Date::month = currentMonth;
-        Date::year = currentYear;
-        Date::dayOfWeek = currentDayOfWeek;
-        Date::leapYear = currentYearIsLeap;
-        Date::lastDayOfMonth = currentDayIsLastOfMonth;
-    }
 }
 
-
-//TODO: capisci come ritornare stringhe.
 std::string Date::getFullDate(const DateFormat &dateFormat) const {
     std::string fullDate;
     std::string currentDay = std::string(2 - std::to_string(day).length(), '0') + std::to_string(day);

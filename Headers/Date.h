@@ -24,11 +24,11 @@ public:
 
     void initializeDate();
 
-    void setDay(int day);
+    void setDay(int newDay);
 
-    void setMonth(int month);
+    void setMonth(int newMonth);
 
-    void setYear(int year);
+    void setYear(int newYear);
 
     void setFullDate(int newDay, int newMonth, int newYear);
 
@@ -48,7 +48,7 @@ public:
 
 private:
 
-    void verifyLeapYear(int year);
+    void verifyLeapYear(int newYear);
 
     bool isValidDay(int newDay);
 

@@ -15,9 +15,9 @@ TEST(TimeTest, NonDefaultConstructorTest) {
     Time time0 = Time(13, 10, 43);
     Time time1 = Time(00, 4, 4);
     Time time2 = Time(18, 2, 59);
-    ASSERT_EQ(time0.getFullTime(), "13:10:43");
-    ASSERT_EQ(time1.getFullTime(), "00:04:04");
-    ASSERT_EQ(time2.getFullTime(), "18:02:59");
+    ASSERT_EQ(time0.getFullTime(Format24h), "13:10:43");
+    ASSERT_EQ(time1.getFullTime(Format24h), "00:04:04");
+    ASSERT_EQ(time2.getFullTime(Format24h), "18:02:59");
 }
 
 TEST(TimeTest, InsertingInvalidSecond) {
@@ -44,17 +44,13 @@ TEST(TimeTest, InsertingInvalidHour) {
 
 TEST(TimeTest, InsertingInvalidFullTime) {
     Time time;
-    time.setFullTime(25, 2, 23);  // 1998 is not leap.
-    ASSERT_NE(time.getFullTime(), "25:02:23");
-    time.setFullTime(23, 2, 23);  // 2000 is leap.
-    ASSERT_EQ(time.getFullTime(), "23:02:23");
+    ASSERT_THROW(time.setFullTime(25, 2, 23), std::invalid_argument); // hour < 24
+    ASSERT_NO_THROW(time.setFullTime(23, 2, 23));  // time is valid
 }
 
 TEST(TimeTest, TimeFormatTest) {
     Time time;
     time.setFullTime(16, 30, 00);
-    time.setTimeFormat(Format12h);
-    ASSERT_EQ(time.getFullTime(), "04:30:00 PM");
-    time.setTimeFormat(Format24h);
-    ASSERT_EQ(time.getFullTime(), "16:30:00");
+    ASSERT_EQ(time.getFullTime(Format12h), "04:30:00");
+    ASSERT_EQ(time.getFullTime(Format24h), "16:30:00");
 }

@@ -20,8 +20,6 @@ public:
 
     void initializeTime();
 
-public:
-
     void setSeconds(int newSeconds);
 
     void setMinutes(int newMinutes);

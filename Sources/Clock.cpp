@@ -46,12 +46,11 @@ void Clock::increaseOneSecond() {
             }
         }
         notify();
-//        printFullTime();
-//        printFullDate();
     }
     catch (const std::exception &e) {
         std::cerr << e.what() << std::endl;
-        //TODO: chiamare una nuova inizializzazione dell'orologio?
+        date->initializeDate();
+        time->initializeTime();
     }
 }
 
@@ -70,11 +69,21 @@ void Clock::increaseOneDay() {
 }
 
 void Clock::setTime(int hours, int minutes, int second) {
-    time->setFullTime(hours, minutes, second);
+    try {
+        time->setFullTime(hours, minutes, second);
+    } catch (const std::exception &e) {
+        std::cerr << e.what();
+        time->initializeTime();
+    }
 }
 
 void Clock::setDate(int day, int month, int year) {
-    date->setFullDate(day, month, year);
+    try {
+        date->setFullDate(day, month, year);
+    } catch (const std::exception &e) {
+        std::cerr << e.what();
+        date->initializeDate();
+    }
 }
 
 std::string Clock::getDate(const DateFormat &dateFormat) {

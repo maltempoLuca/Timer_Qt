@@ -15,11 +15,11 @@ TEST(DateTest, NonDefaultConstructorTest) {
     Date date0 = Date(12, 10, 1492);
     Date date1 = Date(24, 4, 1998);
     Date date2 = Date(29, 2, 2020);
-    ASSERT_EQ(date0.getFullDate(), "12/10/1492");
+    ASSERT_EQ(date0.getFullDate(DMY), "12/10/1492");
     ASSERT_EQ(date0.getDayOfWeekAsString(), "Wednesday");
-    ASSERT_EQ(date1.getFullDate(), "24/04/1998");
+    ASSERT_EQ(date1.getFullDate(DMY), "24/04/1998");
     ASSERT_EQ(date1.getDayOfWeekAsString(), "Friday");
-    ASSERT_EQ(date2.getFullDate(), "29/02/2020");
+    ASSERT_EQ(date2.getFullDate(DMY), "29/02/2020");
     ASSERT_EQ(date2.getDayOfWeekAsString(), "Saturday");
 }
 
@@ -43,10 +43,8 @@ TEST(DateTest, InsertingInvalidYear) {
 
 TEST(DateTest, InsertingInvalidFullDate) {
     Date date;
-    date.setFullDate(29, 2, 1998);  // 1998 is not leap.
-    ASSERT_NE(date.getFullDate(), "29/02/1998");
-    date.setFullDate(29, 2, 2000);  // 2000 is leap.
-    ASSERT_EQ(date.getFullDate(), "29/02/2000");
+    ASSERT_THROW(date.setFullDate(29, 2, 1998), std::invalid_argument);  // 1998 is not leap.
+    ASSERT_NO_THROW(date.setFullDate(29, 2, 2000));  // 2000 is leap.
 }
 
 TEST(DateTest, isLeapYearTest) {
@@ -66,13 +64,9 @@ TEST(DateTest, isLastDayOfMonthTest) {
 
 TEST(DateTest, DateFormatTest) {
     Date date;
-    date.setFullDate(24, 4, 1998);
-    date.setDateFormat(DMY);
-    ASSERT_EQ(date.getFullDate(), "24/04/1998");
-    date.setDateFormat(MDY);
-    ASSERT_EQ(date.getFullDate(), "04/24/1998");
-    date.setDateFormat(YMD);
-    ASSERT_EQ(date.getFullDate(), "1998/04/24");
-    date.setDateFormat(ReducedFormat);
-    ASSERT_EQ(date.getFullDate(), "24/04");
+    ASSERT_NO_THROW(date.setFullDate(24, 4, 1998));
+    ASSERT_EQ(date.getFullDate(DMY), "24/04/1998");
+    ASSERT_EQ(date.getFullDate(MDY), "04/24/1998");
+    ASSERT_EQ(date.getFullDate(YMD), "1998/04/24");
+    ASSERT_EQ(date.getFullDate(ReducedFormat), "24/04");
 }

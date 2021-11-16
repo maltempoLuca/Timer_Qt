@@ -56,7 +56,6 @@ private:
     QTimer *qTimer;
     static const int OneSecondInMilliSecond;
     std::list<Observer *> observerList;
-
 };
 
 

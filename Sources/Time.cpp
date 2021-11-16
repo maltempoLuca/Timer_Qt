@@ -45,19 +45,9 @@ void Time::setHours(int newHour) {
 }
 
 void Time::setFullTime(int newHours, int newMinutes, int newSeconds) {
-    int currentSeconds = Time::seconds;
-    int currentMinutes = Time::minutes;
-    int currentHours = Time::hours;
-    try {
         setSeconds(newSeconds);
         setMinutes(newMinutes);
         setHours(newHours);
-    } catch (const std::invalid_argument &e) {
-        //std::cerr << e.what() << std::endl;
-        Time::seconds = currentSeconds;
-        Time::minutes = currentMinutes;
-        Time::hours = currentHours;
-    }
 }
 
 int Time::getSeconds() const {
