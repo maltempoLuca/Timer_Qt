@@ -6,7 +6,7 @@
 
 const int Clock::OneSecondInMilliSecond = 1000;
 
-Clock::Clock() : date(std::make_unique<Date>()), time(std::make_unique<Time>()) {
+Clock::Clock() : date(), time() {
     qTimer = new QTimer(this);
     connect(qTimer, SIGNAL(timeout()), this, SLOT(increaseOneSecond()));
     qTimer->start(OneSecondInMilliSecond);
@@ -19,28 +19,28 @@ Clock::~Clock() {
 }
 
 void Clock::printFullDate(const DateFormat &dateFormat) {
-    std::cout << date->getDayOfWeekAsString() << ", " << date->getFullDate(dateFormat) << std::endl;
+    std::cout << date.getDayOfWeekAsString() << ", " << date.getFullDate(dateFormat) << std::endl;
 }
 
 void Clock::printFullTime(const TimeFormat &timeformat) {
-    std::cout << time->getFullTime(timeformat) << std::endl;
+    std::cout << time.getFullTime(timeformat) << std::endl;
 
 }
 
 void Clock::increaseOneSecond() {
     try {
-        if (time->getSeconds() < 59) {
-            time->setSeconds(time->getSeconds() + 1);
+        if (time.getSeconds() < 59) {
+            time.setSeconds(time.getSeconds() + 1);
         } else {
-            time->setSeconds(0);
-            if (time->getMinutes() < 59) {
-                time->setMinutes(time->getMinutes() + 1);
+            time.setSeconds(0);
+            if (time.getMinutes() < 59) {
+                time.setMinutes(time.getMinutes() + 1);
             } else {
-                time->setMinutes(0);
-                if (time->getHours() < 23) {
-                    time->setHours(time->getHours() + 1);
+                time.setMinutes(0);
+                if (time.getHours() < 23) {
+                    time.setHours(time.getHours() + 1);
                 } else {
-                    time->setHours(0);
+                    time.setHours(0);
                     increaseOneDay();
                 }
             }
@@ -49,50 +49,50 @@ void Clock::increaseOneSecond() {
     }
     catch (const std::exception &e) {
         std::cerr << e.what() << std::endl;
-        date->initializeDate();
-        time->initializeTime();
+        date.initializeDate();
+        time.initializeTime();
     }
 }
 
 void Clock::increaseOneDay() {
-    if (!date->isLastDayOfMonth()) {
-        date->setDay(date->getDay() + 1);
+    if (!date.isLastDayOfMonth()) {
+        date.setDay(date.getDay() + 1);
     } else {
-        date->setDay(1);
-        if (date->getMonth() < 12) {
-            date->setMonth(date->getMonth() + 1);
+        date.setDay(1);
+        if (date.getMonth() < 12) {
+            date.setMonth(date.getMonth() + 1);
         } else {
-            date->setMonth(1);
-            date->setYear(date->getYear() + 1);
+            date.setMonth(1);
+            date.setYear(date.getYear() + 1);
         }
     }
 }
 
 void Clock::setTime(int hours, int minutes, int second) {
     try {
-        time->setFullTime(hours, minutes, second);
+        time.setFullTime(hours, minutes, second);
     } catch (const std::exception &e) {
         std::cerr << e.what();
-        time->initializeTime();
+        time.initializeTime();
     }
 }
 
 void Clock::setDate(int day, int month, int year) {
     try {
-        date->setFullDate(day, month, year);
+        date.setFullDate(day, month, year);
     } catch (const std::exception &e) {
         std::cerr << e.what();
-        date->initializeDate();
+        date.initializeDate();
     }
 }
 
 std::string Clock::getDate(const DateFormat &dateFormat) {
-    std::string currentDate = date->getFullDate(dateFormat);
+    std::string currentDate = date.getFullDate(dateFormat);
     return currentDate;
 }
 
 std::string Clock::getTime(const TimeFormat &timeFormat) {
-    std::string currentTime = time->getFullTime(timeFormat);
+    std::string currentTime = time.getFullTime(timeFormat);
     return currentTime;
 }
 
@@ -111,7 +111,7 @@ void Clock::notify() const {
 }
 
 std::string Clock::getDayOfWeek() {
-    return date->getDayOfWeekAsString();
+    return date.getDayOfWeekAsString();
 }
 
 

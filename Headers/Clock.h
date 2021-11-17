@@ -51,8 +51,8 @@ private slots:
 private:
     void increaseOneDay();
 
-    const std::unique_ptr<Date> date;
-    const std::unique_ptr<Time> time;
+    Date date;
+    Time time;
     QTimer *qTimer;
     static const int OneSecondInMilliSecond;
     std::list<Observer *> observerList;
